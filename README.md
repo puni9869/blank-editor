@@ -1,17 +1,27 @@
-# Blank Editor
+<p align="center">
+  <img src="public/favicon/web-app-manifest-512x512.png" alt="App Icon" width="150" />
+</p>
 
-![Contributors](https://img.shields.io/github/contributors/puni9869/blank-editor)
-![Issues](https://img.shields.io/github/issues/puni9869/blank-editor)
-![Pull Requests](https://img.shields.io/github/issues-pr/puni9869/blank-editor)
-![License](https://img.shields.io/github/license/puni9869/blank-editor)
-![Last Commit](https://img.shields.io/github/last-commit/puni9869/blank-editor)
+<h1 align="center">Blank Editor</h1>
 
-A minimal, distraction-free rich text editor built with **TipTap**.  
-Perfect for writing, note-taking, and lightweight content editing with persistent local storage.
+<p align="center">
+  A minimal, premium-grade text editor for clean writing and editing.
+</p>
+
+
+<p align="center">
+  <img src="https://img.shields.io/github/contributors/puni9869/blank-editor" alt="Contributors" />
+  <img src="https://img.shields.io/github/issues/puni9869/blank-editor" alt="Issues" />
+  <img src="https://img.shields.io/github/issues-pr/puni9869/blank-editor" alt="Pull Requests" />
+  <img src="https://img.shields.io/github/license/puni9869/blank-editor" alt="License" />
+  <img src="https://img.shields.io/github/last-commit/puni9869/blank-editor" alt="Last Commit" />
+</p>
+
 
 ---
 
 ## Features
+
 - Copy, New and Clear functionality
 - Mobile screen responsive
 - Highlight & typography extensions
@@ -26,9 +36,8 @@ Perfect for writing, note-taking, and lightweight content editing with persisten
 
 Check out the live demo here: [Blank Editor Demo](https://puni9869.github.io/blank-editor/)
 
-> Add a screenshot or GIF here to showcase the editor in action.
-
 ![img.png](screenshots/img.png)
+![img_2.png](screenshots/img_2.png)
 ![img_1.png](screenshots/img_1.png)
 
 ---

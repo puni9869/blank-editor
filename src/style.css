@@ -267,7 +267,7 @@ p.is-editor-empty:first-child::before {
 
 .dropdown-divider {
     height: 1px;
-    background: var(--gray-1); /* subtle divider color */
+    background: var(--gray-2); /* subtle divider color */
     margin: 0 0; /* spacing around divider */
     pointer-events: none; /* not clickable */
 }
