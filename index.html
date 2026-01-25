@@ -46,16 +46,26 @@
     <meta name="theme-color" content="#ffffff" />
   </head>
   <body>
-    <div class="header">
-      <div class="top-right">
-        <button class="dots-btn" aria-label="More options">
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
+    <div class="header no-select">
+      <div class="top-left">
+        <a href="/" class="brand no-select">
+          <img
+            src="/favicon/apple-touch-icon.png"
+            alt="Blank Editor"
+            class="logo"
+          />
+          <span class="no-select">Blank Editor</span>
+        </a>
       </div>
     </div>
-    <div class="dropdown-menu">
+    <div class="top-right">
+      <button class="dots-btn" aria-label="More options">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div class="dropdown-menu no-select">
       <a href="#" id="new">New</a>
       <a href="#" id="copy">Copy</a>
       <div class="dropdown-divider"></div>
