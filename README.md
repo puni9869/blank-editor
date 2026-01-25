@@ -12,13 +12,13 @@ Perfect for writing, note-taking, and lightweight content editing with persisten
 ---
 
 ## Features
-
-- TipTap Core Editor
-- Placeholder support for first-line guidance
+- Copy, New and Clear functionality
+- Mobile screen responsive
 - Highlight & typography extensions
 - LocalStorage content persistence
 - Minimal, clean UI optimized for focus
 - Fully open-source and customizable
+- Markdown support.
 
 ---
 
