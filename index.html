@@ -1,55 +1,70 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Blank Editor</title>
-    <link rel="stylesheet" href="src/style.css" />
-    <!-- Standard favicons -->
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="96x96"
-      href="/favicon/favicon-96x96.png"
-    />
-    <link rel="icon" href="/favicon/favicon.ico" type="image/x-icon" />
-    <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blank Editor</title>
+  <link rel="stylesheet" href="src/style.css" />
+  <!-- Standard favicons -->
+  <link
+    rel="icon"
+    type="image/png"
+    sizes="96x96"
+    href="/favicon/favicon-96x96.png"
+  />
+  <link rel="icon" href="/favicon/favicon.ico" type="image/x-icon" />
+  <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
 
-    <!-- Apple touch icon -->
-    <link
-      rel="apple-touch-icon"
-      sizes="180x180"
-      href="/favicon/apple-touch-icon.png"
-    />
+  <!-- Apple touch icon -->
+  <link
+    rel="apple-touch-icon"
+    sizes="180x180"
+    href="/favicon/apple-touch-icon.png"
+  />
 
-    <!-- Web app manifest (for Android / PWA) -->
-    <link rel="manifest" href="/favicon/site.webmanifest" />
-    <link
-      rel="icon"
-      sizes="192x192"
-      href="/favicon/web-app-manifest-192x192.png"
-    />
-    <link
-      rel="icon"
-      sizes="512x512"
-      href="/favicon/web-app-manifest-512x512.png"
-    />
+  <!-- Web app manifest (for Android / PWA) -->
+  <link rel="manifest" href="/favicon/site.webmanifest" />
+  <link
+    rel="icon"
+    sizes="192x192"
+    href="/favicon/web-app-manifest-192x192.png"
+  />
+  <link
+    rel="icon"
+    sizes="512x512"
+    href="/favicon/web-app-manifest-512x512.png"
+  />
 
-    <!-- Safari pinned tab -->
-    <link rel="mask-icon" href="/favicon/favicon.svg" color="#5bbad5" />
+  <!-- Safari pinned tab -->
+  <link rel="mask-icon" href="/favicon/favicon.svg" color="#5bbad5" />
 
-    <!-- Windows tile -->
-    <meta name="msapplication-TileColor" content="#2b5797" />
-    <meta name="msapplication-TileImage" content="/favicon/favicon-96x96.png" />
+  <!-- Windows tile -->
+  <meta name="msapplication-TileColor" content="#2b5797" />
+  <meta name="msapplication-TileImage" content="/favicon/favicon-96x96.png" />
 
-    <!-- Theme color for mobile browsers -->
-    <meta name="theme-color" content="#ffffff" />
-  </head>
-  <body>
-    <div class="editor-wrapper">
-      <div class="placeholder"></div>
-      <div id="editor"></div>
-    </div>
-    <script type="module" src="src/main.js"></script>
-  </body>
+  <!-- Theme color for mobile browsers -->
+  <meta name="theme-color" content="#ffffff" />
+</head>
+<body>
+<div class="header">
+  <div class="top-right">
+    <button class="dots-btn" aria-label="More options">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+</div>
+<div class="dropdown-menu">
+  <a href="#" id="new">New</a>
+  <a href="#" id="copy">Copy</a>
+  <a href="#" id="clear">Clear</a>
+</div>
+</div>
+<div class="editor-wrapper">
+  <div class="placeholder"></div>
+  <div id="editor"></div>
+</div>
+<script type="module" src="src/main.js"></script>
+</body>
 </html>

@@ -3,6 +3,7 @@ import StarterKit from '@tiptap/starter-kit';
 import Placeholder from '@tiptap/extension-placeholder';
 import Highlight from '@tiptap/extension-highlight';
 import Typography from '@tiptap/extension-typography';
+import { loadMenu } from './dropdown';
 
 const STORAGE_KEY = 'blank-editor:v1';
 
@@ -50,14 +51,14 @@ const editor = new Editor({
       horizontalRule: true,
     }),
 
-    Placeholder.configure({ placeholder: 'Start writing…' }),
+    Placeholder.configure({ placeholder: 'Whats on your mind...' }),
     Highlight,
     Typography,
   ],
 
   content: loadContent(),
 
-  autofocus: 'start',
+  autofocus: 'end',
 
   injectCSS: false, // keep styling fully controlled by you
 
@@ -80,3 +81,6 @@ const editor = new Editor({
 if (import.meta.env?.DEV) {
   window.editor = editor;
 }
+window.addEventListener('load', () => {
+  loadMenu(editor);
+});
