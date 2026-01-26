@@ -3,7 +3,7 @@ import StarterKit from '@tiptap/starter-kit';
 import Placeholder from '@tiptap/extension-placeholder';
 import Highlight from '@tiptap/extension-highlight';
 import Typography from '@tiptap/extension-typography';
-import { loadMenu } from './dropdown';
+import { closeSaveModal, loadMenu, registerKeyAction, saveFile } from './dropdown';
 
 const STORAGE_KEY = 'blank-editor:v1';
 
@@ -81,6 +81,22 @@ const editor = new Editor({
 if (import.meta.env?.DEV) {
   window.editor = editor;
 }
+
 window.addEventListener('load', () => {
   loadMenu(editor);
+  registerKeyAction();
+
+  document.getElementById('close-modal-btn')
+    .addEventListener('click', () => closeSaveModal());
+
+  document.getElementById('save-file')
+    .addEventListener('click', () => saveFile());
+
+  document.getElementById('saveModal')
+    ?.addEventListener('click', e => {
+      if (e.target.id === 'saveModal') closeSaveModal();
+    });
 });
+
+
+

@@ -1,80 +1,132 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Blank Editor</title>
-    <link rel="stylesheet" href="src/style.css" />
-    <!-- Standard favicons -->
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="96x96"
-      href="/favicon/favicon-96x96.png"
-    />
-    <link rel="icon" href="/favicon/favicon.ico" type="image/x-icon" />
-    <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blank Editor</title>
+  <link rel="stylesheet" href="src/style.css" />
+  <!-- Standard favicons -->
+  <link
+    rel="icon"
+    type="image/png"
+    sizes="96x96"
+    href="/favicon/favicon-96x96.png"
+  />
+  <link rel="icon" href="/favicon/favicon.ico" type="image/x-icon" />
+  <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
 
-    <!-- Apple touch icon -->
-    <link
-      rel="apple-touch-icon"
-      sizes="180x180"
-      href="/favicon/apple-touch-icon.png"
-    />
+  <!-- Apple touch icon -->
+  <link
+    rel="apple-touch-icon"
+    sizes="180x180"
+    href="/favicon/apple-touch-icon.png"
+  />
 
-    <!-- Web app manifest (for Android / PWA) -->
-    <link rel="manifest" href="/favicon/site.webmanifest" />
-    <link
-      rel="icon"
-      sizes="192x192"
-      href="/favicon/web-app-manifest-192x192.png"
-    />
-    <link
-      rel="icon"
-      sizes="512x512"
-      href="/favicon/web-app-manifest-512x512.png"
-    />
+  <!-- Web app manifest (for Android / PWA) -->
+  <link rel="manifest" href="/favicon/site.webmanifest" />
+  <link
+    rel="icon"
+    sizes="192x192"
+    href="/favicon/web-app-manifest-192x192.png"
+  />
+  <link
+    rel="icon"
+    sizes="512x512"
+    href="/favicon/web-app-manifest-512x512.png"
+  />
 
-    <!-- Safari pinned tab -->
-    <link rel="mask-icon" href="/favicon/favicon.svg" color="#5bbad5" />
+  <!-- Safari pinned tab -->
+  <link rel="mask-icon" href="/favicon/favicon.svg" color="#5bbad5" />
 
-    <!-- Windows tile -->
-    <meta name="msapplication-TileColor" content="#2b5797" />
-    <meta name="msapplication-TileImage" content="/favicon/favicon-96x96.png" />
+  <!-- Windows tile -->
+  <meta name="msapplication-TileColor" content="#2b5797" />
+  <meta name="msapplication-TileImage" content="/favicon/favicon-96x96.png" />
 
-    <!-- Theme color for mobile browsers -->
-    <meta name="theme-color" content="#ffffff" />
-  </head>
-  <body>
-    <div class="header no-select">
-      <div class="top-left">
-        <a href="/blank-editor" class="brand no-select">
-          <img
-            src="/favicon/apple-touch-icon.png"
-            alt="Blank Editor"
-            class="logo"
-          />
-          <span class="no-select">Blank Editor</span>
-        </a>
-      </div>
-    </div>
-    <div class="top-right">
-      <button class="dots-btn" aria-label="More options">
-        <span></span>
-        <span></span>
-        <span></span>
+  <!-- Theme color for mobile browsers -->
+  <meta name="theme-color" content="#ffffff" />
+</head>
+<body>
+<div class="header no-select">
+  <div class="top-left">
+    <a href="/blank-editor" class="brand no-select">
+      <img
+        src="/favicon/apple-touch-icon.png"
+        alt="Blank Editor"
+        class="logo"
+      />
+      <span class="no-select">Blank Editor</span>
+    </a>
+  </div>
+</div>
+<div class="top-right">
+  <button class="dots-btn" aria-label="More options">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</div>
+<div class="dropdown-menu no-select">
+  <a href="#" id="new">New</a>
+  <a href="#" id="copy">Copy</a>
+  <a href="#" id="save">Save</a>
+  <div class="dropdown-divider"></div>
+  <a href="#" id="clear" class="danger">Clear</a>
+</div>
+<div class="editor-wrapper">
+  <div class="placeholder"></div>
+  <div id="editor"></div>
+</div>
+
+<!-- Save Modal -->
+<div
+  class="modal-backdrop"
+  id="saveModal"
+  hidden
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="saveTitle"
+>
+  <div class="modal">
+    <h2 id="saveTitle">Save file</h2>
+
+    <label for="fileName">
+      File name
+      <input
+        type="text"
+        id="fileName"
+        placeholder="Untitled"
+        autocomplete="off"
+      />
+    </label>
+
+    <label for="fileFormat">
+      Format
+      <select id="fileFormat">
+        <option value="txt">Text (.txt)</option>
+      </select>
+    </label>
+
+    <div class="modal-actions">
+      <button
+        id="close-modal-btn"
+        type="button"
+        class="btn ghost"
+      >
+        Cancel
+      </button>
+
+      <button
+        id="save-file"
+        type="button"
+        class="btn primary"
+      >
+        Save
       </button>
     </div>
-    <div class="dropdown-menu no-select">
-      <a href="#" id="new">New</a>
-      <a href="#" id="copy">Copy</a>
-      <div class="dropdown-divider"></div>
-      <a href="#" id="clear" class="danger">Clear</a>
-    </div>
-    <div class="editor-wrapper">
-      <div class="placeholder"></div>
-      <div id="editor"></div>
-    </div>
-    <script type="module" src="src/main.js"></script>
-  </body>
+  </div>
+</div>
+
+
+<script type="module" src="src/main.js"></script>
+</body>
 </html>
