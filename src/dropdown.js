@@ -57,7 +57,7 @@ function saveFile(editor) {
   if (!editor || !fileNameEl || !fileFormatEl) return;
 
   const name = fileNameEl.value || 'Untitled';
-  const format = fileFormatEl.value || '.txt';
+  const format = fileFormatEl.value;
 
   const text = editor.getText(false);
   downloadTxt(name + format, text);
@@ -66,6 +66,7 @@ function saveFile(editor) {
 }
 
 function downloadTxt(filename, text) {
+  alert(filename);
   const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
   const url = URL.createObjectURL(blob);
 
@@ -86,10 +87,7 @@ function closeSaveModal() {
   if (modal) modal.classList.remove('modal-backdrop-show');
 
   const fileName = document.getElementById('fileName');
-  const fileFormat = document.getElementById('fileFormat');
-
   if (fileName) fileName.value = '';
-  if (fileFormat) fileFormat.value = '.txt';
 }
 
 export function loadMenu(editor) {
