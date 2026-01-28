@@ -96,12 +96,60 @@
 <div class="dropdown-menu no-select">
   <a href="#" id="new">New</a>
   <a href="#" id="copy">Copy</a>
+  <a href="#" id="save">Save</a>
   <div class="dropdown-divider"></div>
   <a href="#" id="clear" class="danger">Clear</a>
 </div>
 <div class="editor-wrapper">
   <div class="placeholder"></div>
   <div id="editor"></div>
+</div>
+
+<!-- Save Modal -->
+<div
+  class="modal-backdrop"
+  id="saveModal"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="saveTitle"
+>
+  <div class="modal">
+    <h2 id="saveTitle">Save file</h2>
+
+    <label for="fileName">
+      File name
+      <input
+        type="text"
+        id="fileName"
+        placeholder="Untitled"
+        autocomplete="off"
+      />
+    </label>
+
+    <label for="fileFormat">
+      Format
+      <select id="fileFormat">
+        <option value="txt">Text (.txt)</option>
+      </select>
+    </label>
+
+    <div class="modal-actions">
+      <button
+        id="close-modal-btn"
+        type="button"
+        class="btn ghost"
+      >
+        Cancel
+      </button>
+      <button
+        id="save-file"
+        type="button"
+        class="btn primary"
+      >
+        Save
+      </button>
+    </div>
+  </div>
 </div>
 <script type="module" src="src/main.js"></script>
 </body>

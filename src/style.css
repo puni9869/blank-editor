@@ -314,3 +314,92 @@ p.is-editor-empty:first-child::before {
   -webkit-user-select: none; /* Safari */
   -ms-user-select: none; /* Old Edge */
 }
+
+/* Save option */
+
+/* Backdrop */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.45);
+  backdrop-filter: blur(6px);
+  display: none;
+  place-items: center;
+  z-index: 1000;
+}
+.modal-backdrop-show {
+  display: grid;
+}
+
+/* Modal */
+.modal {
+  width: min(92vw, 420px);
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12),
+  0 1px 0 rgba(255, 255, 255, 0.6) inset;
+}
+
+/* Title */
+.modal h2 {
+  margin: 0 0 16px;
+  font-size: 1.1rem;
+}
+
+/* Fields */
+.modal label {
+  display: block;
+  font-size: 0.85rem;
+  color: #475569;
+  margin-bottom: 14px;
+}
+
+.modal input,
+.modal select {
+  width: 100%;
+  margin-top: 7px;
+  padding: 10px 8px 10px 8px;
+  border-radius: 11px;
+  border: 1px solid var(--gray-2);
+  font-size: 0.95rem;
+  -webkit-appearance: initial;
+}
+
+.modal input:focus,
+.modal select:focus {
+  outline: none;
+  border-color: #6366f1;
+}
+
+/* Actions */
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+/* Buttons */
+.btn {
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  border: none;
+}
+
+.btn.primary {
+  background: #0f172a;
+  color: white;
+}
+
+.btn.primary:hover {
+  background: var(--black);
+}
+
+.btn.ghost {
+  color: var(--black);
+  background: var(--gray-15);
+  border-radius: 999px;
+}
