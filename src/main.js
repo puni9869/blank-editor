@@ -4,7 +4,9 @@ import Placeholder from '@tiptap/extension-placeholder';
 import Highlight from '@tiptap/extension-highlight';
 import Typography from '@tiptap/extension-typography';
 import { loadMenu } from './dropdown';
+import { registerSW } from 'virtual:pwa-register';
 
+registerSW({ immediate: true });
 const STORAGE_KEY = 'blank-editor:v1';
 
 /* --------------------
@@ -74,6 +76,12 @@ const editor = new Editor({
     saveContent(editor);
   },
 });
+editor.on('update', () => {
+  saveContent(editor);
+});
+
+const saved = localStorage.getItem('blank-content');
+if (saved) editor.commands.setContent(saved);
 
 /* --------------------
    Optional: expose for debugging

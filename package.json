@@ -63,6 +63,7 @@
     "@tiptap/extension-placeholder": "^3.17.0",
     "@tiptap/extension-typography": "^3.17.0",
     "@tiptap/starter-kit": "^3.17.0",
-    "prosemirror-state": "^1.4.4"
+    "prosemirror-state": "^1.4.4",
+    "vite-plugin-pwa": "^1.2.0"
   }
 }
