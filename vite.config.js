@@ -55,6 +55,7 @@ export default defineConfig({
     },
 
     rollupOptions: {
+      // treeshake: 'recommended',
       output: {
         inlineDynamicImports: true,
       },
