@@ -8,6 +8,7 @@ import TaskList from '@tiptap/extension-task-list';
 import TaskItem from '@tiptap/extension-task-item';
 import { loadMenu } from './dropdown';
 import { loadTopToolbar } from './toolbar.js';
+import { registerKey } from './keyboard_shortcut.js';
 
 const STORAGE_KEY = 'blank-editor:v1';
 
@@ -102,4 +103,5 @@ if (import.meta.env?.DEV) {
 window.addEventListener('load', () => {
   loadMenu(editor);
   loadTopToolbar(editor);
+  registerKey(editor);
 });
