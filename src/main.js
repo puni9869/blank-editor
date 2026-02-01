@@ -55,10 +55,6 @@ const editor = new Editor({
       strike: true,
       orderedList: true,
     }),
-    TaskList,
-    TaskItem.configure({
-      nested: true, // allows sub tasks
-    }),
     Placeholder.configure({ placeholder: 'Whats on your mind...' }),
     Highlight,
     Typography,
