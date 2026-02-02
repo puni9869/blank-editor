@@ -12,12 +12,14 @@ function throttle(fn, limit) {
 }
 
 function handleKey(event, editor) {
-  event.stopPropagation();  // Prevent event bubbling
-  event.preventDefault();   // Optional: prevent default behavior (like scrolling)
+  // Optional: prevent default behavior (like scrolling)
   const isCtrlOrCmd = event.ctrlKey || event.metaKey;
   if (isCtrlOrCmd && (event.key === 's' || event.key === 'S')) {
+    event.stopPropagation();  // Prevent event bubbling
+    event.preventDefault();
     openSaveModal(editor);
   } else if (event.key === 'Escape') {
+    event.preventDefault();
     closeSaveModal();
   }
 }
@@ -25,7 +27,7 @@ function handleKey(event, editor) {
 
 export function registerKey(editor) {
   // Throttle to 300ms
-  const throttledHandler = throttle(handleKey, 20);
+  const throttledHandler = throttle(handleKey, 0);
   document.addEventListener('keydown', (e) => throttledHandler(e, editor), false);
 }
 

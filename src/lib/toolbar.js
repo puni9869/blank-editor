@@ -17,6 +17,7 @@ function actionMap(editor, cmd) {
     'align-center': () => editor.commands.setTextAlign('center'),
     'align-right': () => editor.commands.setTextAlign('right'),
     'align-justify': () => editor.commands.setTextAlign('justify'),
+    'highlight': () => editor.commands.toggleHighlight(),
   };
   map[cmd]?.();
 }

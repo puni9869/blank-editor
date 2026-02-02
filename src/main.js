@@ -4,9 +4,9 @@ import Placeholder from '@tiptap/extension-placeholder';
 import Highlight from '@tiptap/extension-highlight';
 import Typography from '@tiptap/extension-typography';
 import TextAlign from '@tiptap/extension-text-align';
-import { loadMenu } from './dropdown';
-import { loadTopToolbar } from './toolbar.js';
-import { registerKey } from './keyboard_shortcut.js';
+import { loadMenu } from './lib/dropdown.js';
+import { loadTopToolbar } from './lib/toolbar.js';
+import { registerKey } from './lib/keyboard-shortcut.js';
 
 const STORAGE_KEY = 'blank-editor:v1';
 

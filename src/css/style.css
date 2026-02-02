@@ -212,22 +212,22 @@ p.is-editor-empty:first-child::before {
 .dots-btn {
     width: 30px;
     height: 30px;
-    border-radius: 10px;
-    background: var(--white);
+    background: var(--gray-15);
+    flex-direction: column;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 2px;
     cursor: pointer;
     border-color: var(--gray-2);
-    border-style: solid;
+    border-style: none;
+    border-width: thin;
 }
 
 .dots-btn span {
     width: 3px;
     height: 3px;
     background: var(--black);
-    border-radius: 50%;
 }
 
 .dots-btn:hover,
@@ -241,7 +241,6 @@ p.is-editor-empty:first-child::before {
     right: 15px;
     top: 40px;
     background: var(--white);
-    border-radius: 11px;
     min-width: 100px;
     /* softer, layered shadow */
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
@@ -350,7 +349,6 @@ p.is-editor-empty:first-child::before {
 .modal {
     width: min(92vw, 420px);
     background: white;
-    border-radius: 16px;
     padding: 20px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12),
     0 1px 0 rgba(255, 255, 255, 0.6) inset;
@@ -375,7 +373,6 @@ p.is-editor-empty:first-child::before {
     width: 100%;
     margin-top: 7px;
     padding: 10px 8px 10px 8px;
-    border-radius: 11px;
     border: 1px solid var(--gray-2);
     font-size: 0.95rem;
     -webkit-appearance: initial;
@@ -398,7 +395,6 @@ p.is-editor-empty:first-child::before {
 /* Buttons */
 .btn {
     padding: 8px 14px;
-    border-radius: 999px;
     font-size: 0.85rem;
     cursor: pointer;
     border: none;
@@ -416,7 +412,6 @@ p.is-editor-empty:first-child::before {
 .btn.ghost {
     color: var(--black);
     background: var(--gray-15);
-    border-radius: 999px;
 }
 
 /* Toolbar container */
@@ -436,7 +431,6 @@ p.is-editor-empty:first-child::before {
     background: transparent;
     width: 35px;
     height: 30px;
-    border-radius: 6px;
     cursor: pointer;
     font-size: 16px;
     color: var(--black);
@@ -462,7 +456,6 @@ p.is-editor-empty:first-child::before {
 .align-group {
     display: flex;
     align-items: center;
-    border-radius: 8px;
     overflow: hidden;
     height: 30px;
 }
@@ -487,6 +480,11 @@ p.is-editor-empty:first-child::before {
 
 button[data-cmd="task"] {
     width: fit-content;
+}
+
+button[data-cmd="highlight"] {
+    background: yellow;
+    padding: 6px;
 }
 
 @media (max-width: 900px) {
