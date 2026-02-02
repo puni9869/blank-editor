@@ -220,7 +220,7 @@ p.is-editor-empty:first-child::before {
     gap: 2px;
     cursor: pointer;
     border-color: var(--gray-2);
-    border-style: none;
+    border-style: groove;
     border-width: thin;
 }
 
@@ -242,12 +242,9 @@ p.is-editor-empty:first-child::before {
     top: 40px;
     background: var(--white);
     min-width: 100px;
-    /* softer, layered shadow */
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
-
     overflow: hidden;
     border-color: var(--gray-2);
-    border-style: solid;
+    border-style: groove;
 }
 
 .dropdown-menu a {
@@ -423,12 +420,15 @@ p.is-editor-empty:first-child::before {
     flex-direction: row;
     justify-content: center;
     justify-items: center;
+    gap:3px;
 }
 
 /* Buttons */
 .top-toolbar button {
-    border: none;
+    border-color: var(--gray-2);
     background: transparent;
+    border-style: groove;
+    border-width: thin;
     width: 35px;
     height: 30px;
     cursor: pointer;
@@ -458,15 +458,17 @@ p.is-editor-empty:first-child::before {
     align-items: center;
     overflow: hidden;
     height: 30px;
+    gap:3px;
 }
 
 .align-group button {
-    border: none;
+    border-style: groove;
     background: transparent;
     height: 100%;
     font-size: 13px;
     color: var(--black);
     cursor: pointer;
+    gap:3px;
 }
 
 .align-group button:hover {
@@ -487,7 +489,7 @@ button[data-cmd="highlight"] {
     padding: 6px;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1040px) {
     /* Hide the toolbar */
     .top-toolbar {
         display: none;
