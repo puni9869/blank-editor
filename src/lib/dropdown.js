@@ -32,7 +32,7 @@ export function openSaveModal(editor) {
   saveBtn.onclick = () => saveFile(editor);
   cancelBtn.onclick = closeSaveModal;
 
-  fileName.onkeydown = (e) => {
+  fileName.onkeydown = e => {
     if (e.key === 'Enter') {
       e.preventDefault();
       saveFile(editor);
@@ -74,7 +74,6 @@ function downloadTxt(filename, text) {
   document.body.removeChild(a);
   URL.revokeObjectURL(url);
 }
-
 
 export function closeSaveModal() {
   const modal = document.getElementById('saveModal');

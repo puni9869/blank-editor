@@ -2,7 +2,7 @@ import { closeSaveModal, openSaveModal } from './dropdown.js';
 
 function throttle(fn, limit) {
   let lastCall = 0;
-  return function(...args) {
+  return function (...args) {
     const now = Date.now();
     if (now - lastCall >= limit) {
       lastCall = now;
@@ -13,9 +13,10 @@ function throttle(fn, limit) {
 
 function handleKey(event, editor) {
   // Optional: prevent default behavior (like scrolling)
-  const isCtrlOrCmdNotShift = event.ctrlKey || event.metaKey && !event.shiftKey;
+  const isCtrlOrCmdNotShift =
+    event.ctrlKey || (event.metaKey && !event.shiftKey);
   if (isCtrlOrCmdNotShift && (event.key === 's' || event.key === 'S')) {
-    event.stopPropagation();  // Prevent event bubbling
+    event.stopPropagation(); // Prevent event bubbling
     event.preventDefault();
     openSaveModal(editor);
   } else if (event.key === 'Escape') {
@@ -25,10 +26,8 @@ function handleKey(event, editor) {
   }
 }
 
-
 export function registerKey(editor) {
   // Throttle to 300ms
   const throttledHandler = throttle(handleKey, 0);
-  document.addEventListener('keydown', (e) => throttledHandler(e, editor), false);
+  document.addEventListener('keydown', e => throttledHandler(e, editor), false);
 }
-

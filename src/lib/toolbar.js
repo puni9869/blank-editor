@@ -17,7 +17,7 @@ function actionMap(editor, cmd) {
     'align-center': () => editor.commands.setTextAlign('center'),
     'align-right': () => editor.commands.setTextAlign('right'),
     'align-justify': () => editor.commands.setTextAlign('justify'),
-    'highlight': () => editor.commands.toggleHighlight(),
+    highlight: () => editor.commands.toggleHighlight(),
   };
   map[cmd]?.();
 }
@@ -26,7 +26,7 @@ export function loadTopToolbar(editor) {
   const toolbar = document.getElementById('top-toolbar');
   if (!toolbar) return;
 
-  toolbar.addEventListener('click', (e) => {
+  toolbar.addEventListener('click', e => {
     const btn = e.target.closest('button[data-cmd]');
     if (!btn) return;
     const cmd = btn.dataset.cmd;
