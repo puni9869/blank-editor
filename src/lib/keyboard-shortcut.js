@@ -21,6 +21,7 @@ function handleKey(event, editor) {
   } else if (event.key === 'Escape') {
     event.preventDefault();
     closeSaveModal();
+    editor.commands.focus();
   }
 }
 
