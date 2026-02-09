@@ -20,7 +20,7 @@ async function doAction(editor, t) {
   }
 }
 
-export function openSaveModal(editor) {
+export function openSaveModal(editor, ) {
   const modal = document.getElementById('saveModal');
   const saveBtn = document.getElementById('save-file');
   const cancelBtn = document.getElementById('close-modal-btn');
