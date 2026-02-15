@@ -9,15 +9,14 @@ import { loadMenu } from './lib/dropdown.js';
 import { loadTopToolbar } from './lib/toolbar.js';
 import { registerKey } from './lib/keyboard-shortcut.js';
 import { saveTitle } from './lib/editor-title.js';
-
-const STORAGE_KEY = 'blank-editor:v1';
+import { EDITOR_STORAGE_KEY } from './config/config.js';
 
 /* --------------------
    Storage helpers
 -------------------- */
 function loadContent() {
   try {
-    const raw = localStorage.getItem(STORAGE_KEY);
+    const raw = localStorage.getItem(EDITOR_STORAGE_KEY);
     return raw ? JSON.parse(raw) : null;
   } catch (err) {
     console.warn('Failed to load editor content', err);

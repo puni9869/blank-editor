@@ -1,4 +1,4 @@
-export const EDITOR_TITLE_KEY = 'editorTitle';
+import { EDITOR_TITLE_KEY } from '../config/config.js';
 
 export function saveTitle(editor) {
   if (!editor) {

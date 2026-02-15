@@ -1,4 +1,5 @@
-import { EDITOR_TITLE_KEY, saveTitle } from './editor-title.js';
+import { saveTitle } from './editor-title.js';
+import { EDITOR_TITLE_KEY } from '../config/config.js';
 
 async function doAction(editor, t) {
   if (!editor) {
