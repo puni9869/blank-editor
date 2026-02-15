@@ -1,4 +1,3 @@
-
 <p align="center">
   <img src="public/favicon/web-app-manifest-512x512.png" alt="App Icon" width="150" />
 </p>
@@ -23,22 +22,22 @@
 
 ### 🧠 AI-Powered Writing Assistance
 
-* Smart content refinement and clarity improvement
-* Intelligent rewriting for better flow and tone
+- Smart content refinement and clarity improvement
+- Intelligent rewriting for better flow and tone
 
 ### 📝 Core Editing Features
 
-* Copy, New, and Clear functionality
-* Highlight & typography extensions
-* Markdown support
-* LocalStorage content persistence
-* Fully open-source and customizable
+- Copy, New, and Clear functionality
+- Highlight & typography extensions
+- Markdown support
+- LocalStorage content persistence
+- Fully open-source and customizable
 
 ### 🎯 Focused Experience
 
-* Minimal, distraction-free UI
-* Premium-grade typography
-* Fully responsive (mobile optimized)
+- Minimal, distraction-free UI
+- Premium-grade typography
+- Fully responsive (mobile optimized)
 
 ---
 
