@@ -1,3 +1,4 @@
+
 <p align="center">
   <img src="public/favicon/web-app-manifest-512x512.png" alt="App Icon" width="150" />
 </p>
@@ -5,7 +6,7 @@
 <h1 align="center">Blank Editor</h1>
 
 <p align="center">
-  A minimal, premium-grade text editor for clean writing and editing.
+  A minimal, premium-grade AI-powered text editor for clean writing and intelligent editing.
 </p>
 
 <p align="center">
@@ -18,15 +19,26 @@
 
 ---
 
-## Features
+## ✨ Features
 
-- Copy, New and Clear functionality
-- Mobile screen responsive
-- Highlight & typography extensions
-- LocalStorage content persistence
-- Minimal, clean UI optimized for focus
-- Fully open-source and customizable
-- Markdown support.
+### 🧠 AI-Powered Writing Assistance
+
+* Smart content refinement and clarity improvement
+* Intelligent rewriting for better flow and tone
+
+### 📝 Core Editing Features
+
+* Copy, New, and Clear functionality
+* Highlight & typography extensions
+* Markdown support
+* LocalStorage content persistence
+* Fully open-source and customizable
+
+### 🎯 Focused Experience
+
+* Minimal, distraction-free UI
+* Premium-grade typography
+* Fully responsive (mobile optimized)
 
 ---
 
