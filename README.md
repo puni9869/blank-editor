@@ -46,9 +46,10 @@
 
 Check out the live demo here: [Blank Editor Demo](https://puni9869.github.io/blank-editor/)
 
-![img.png](screenshots/img.png)
-![img_2.png](screenshots/img_2.png)
-![img_1.png](screenshots/img_1.png)
+![img_7.png](screenshots%2Fimg_7.png)
+![img_5.png](screenshots%2Fimg_5.png)
+![img_4.png](screenshots%2Fimg_4.png)
+![img_3.png](screenshots%2Fimg_3.png)
 
 ---
 
