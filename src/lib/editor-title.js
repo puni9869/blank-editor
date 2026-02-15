@@ -14,5 +14,4 @@ export function saveTitle(editor) {
 export function clearTitleData() {
   localStorage.removeItem(EDITOR_TITLE_KEY);
   document.getElementById('title').value = '';
-  console.log('Clieked');
 }

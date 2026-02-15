@@ -100,4 +100,5 @@ window.addEventListener('load', () => {
   loadMenu(editor);
   loadTopToolbar(editor);
   registerKey(editor);
+
 });
