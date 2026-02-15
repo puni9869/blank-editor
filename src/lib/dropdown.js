@@ -1,6 +1,8 @@
 import {clearTitleData, saveTitle} from './editor-title.js';
 import {EDITOR_TITLE_KEY} from '../config/config.js';
-import {error, info, success} from "./toast.js";
+import {info, success} from "./toast";
+import {Notes} from "../db/notes";
+import {Note} from "../models/note";
 
 
 async function doAction(editor, t) {
@@ -63,7 +65,7 @@ export function openSaveModal(editor) {
 	}, 0);
 }
 
-function saveFile(editor) {
+async function saveFile(editor) {
 	const fileNameEl = document.getElementById('fileName');
 	const fileFormatEl = document.getElementById('fileFormat');
 	const titleEL = document.getElementById('title');
@@ -76,10 +78,17 @@ function saveFile(editor) {
 	const format = fileFormatEl.value;
 
 	localStorage?.setItem(EDITOR_TITLE_KEY, name);
+
+	const note = new Note({
+		tags: ['default'],
+		workspace: ['default'],
+		content: editor.getJSON()
+	});
+	await Notes.add(note);
+
 	saveTitle(editor);
 	const text = editor.getText(false);
 	downloadTxt(name + format, text);
-
 	closeSaveModal();
 }
 
