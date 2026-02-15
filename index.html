@@ -1,109 +1,116 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
+<head>
+    <meta charset="UTF-8"/>
     <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, viewport-fit=cover"
+            name="viewport"
+            content="width=device-width, initial-scale=1, viewport-fit=cover"
     />
     <title>Blank Editor</title>
-    <link rel="stylesheet" href="src/css/style.css" />
+    <link rel="stylesheet" href="src/css/style.css"/>
     <!-- Standard favicons -->
     <link
-      rel="icon"
-      type="image/png"
-      sizes="96x96"
-      href="/favicon/favicon-96x96.png"
+            rel="icon"
+            type="image/png"
+            sizes="96x96"
+            href="/favicon/favicon-96x96.png"
     />
-    <meta name="theme-color" content="#000000" />
+    <meta name="theme-color" content="#000000"/>
 
-    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
 
-    <link rel="icon" href="/favicon/favicon.ico" type="image/x-icon" />
-    <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+    <link rel="icon" href="/favicon/favicon.ico" type="image/x-icon"/>
+    <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg"/>
 
     <!-- Apple touch icon -->
     <link
-      rel="apple-touch-icon"
-      sizes="180x180"
-      href="/favicon/apple-touch-icon.png"
+            rel="apple-touch-icon"
+            sizes="180x180"
+            href="/favicon/apple-touch-icon.png"
     />
 
     <!-- Web app manifest (for Android / PWA) -->
-    <link rel="manifest" href="/favicon/site.webmanifest" />
+    <link rel="manifest" href="/favicon/site.webmanifest"/>
     <link
-      rel="icon"
-      sizes="192x192"
-      href="/favicon/web-app-manifest-192x192.png"
+            rel="icon"
+            sizes="192x192"
+            href="/favicon/web-app-manifest-192x192.png"
     />
     <link
-      rel="icon"
-      sizes="512x512"
-      href="/favicon/web-app-manifest-512x512.png"
+            rel="icon"
+            sizes="512x512"
+            href="/favicon/web-app-manifest-512x512.png"
     />
 
     <!-- Safari pinned tab -->
-    <link rel="mask-icon" href="/favicon/favicon.svg" color="#5bbad5" />
+    <link rel="mask-icon" href="/favicon/favicon.svg" color="#5bbad5"/>
 
     <!-- Windows tile -->
-    <meta name="msapplication-TileColor" content="#2b5797" />
-    <meta name="msapplication-TileImage" content="/favicon/favicon-96x96.png" />
+    <meta name="msapplication-TileColor" content="#2b5797"/>
+    <meta name="msapplication-TileImage" content="/favicon/favicon-96x96.png"/>
 
     <!-- Theme color for mobile browsers -->
-    <meta name="theme-color" content="#ffffff" />
+    <meta name="theme-color" content="#ffffff"/>
 
     <meta
-      name="description"
-      content="Blank Editor is a minimal, distraction-free text editor designed for clean writing and focused editing. Open-source, fast, responsive, and Markdown-ready."
+            name="description"
+            content="Blank Editor is a minimal, distraction-free text editor designed for clean writing and focused editing. Open-source, fast, responsive, and Markdown-ready."
     />
     <meta
-      name="keywords"
-      content="Blank Editor, minimal text editor, distraction free editor, markdown editor, writing app, clean editor, open source editor"
+            name="keywords"
+            content="Blank Editor, minimal text editor, distraction free editor, markdown editor, writing app, clean editor, open source editor"
     />
-    <link rel="canonical" href="https://puni9869.github.io/blank-editor/" />
+    <link rel="canonical" href="https://puni9869.github.io/blank-editor/"/>
 
     <!-- Open Graph (Facebook, LinkedIn, Slack) -->
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content="website"/>
     <meta
-      property="og:title"
-      content="Blank Editor – Minimal Text Editor for Focused Writing"
+            property="og:title"
+            content="Blank Editor – Minimal Text Editor for Focused Writing"
     />
     <meta
-      property="og:description"
-      content="A minimal, premium-grade web editor for clean writing and editing. Fast, responsive, and open-source."
+            property="og:description"
+            content="A minimal, premium-grade web editor for clean writing and editing. Fast, responsive, and open-source."
     />
     <meta
-      property="og:url"
-      content="https://puni9869.github.io/blank-editor/"
+            property="og:url"
+            content="https://puni9869.github.io/blank-editor/"
     />
 
     <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Blank Editor – Minimal Text Editor" />
+    <meta name="twitter:card" content="summary_large_image"/>
+    <meta name="twitter:title" content="Blank Editor – Minimal Text Editor"/>
     <meta
-      name="twitter:description"
-      content="Distraction-free, minimal editor for clean writing. Open-source and beautifully simple."
+            name="twitter:description"
+            content="Distraction-free, minimal editor for clean writing. Open-source and beautifully simple."
     />
-  </head>
-  <body>
-    <div class="header no-select">
-      <div class="top-left">
-        <a href="/blank-editor" class="brand no-select">
-          <img
-            src="/favicon/apple-touch-icon.png"
-            alt="Blank Editor"
-            class="logo"
-          />
-          <span class="no-select">Blank Editor</span>
-        </a>
-      </div>
-      <div class="top-toolbar" id="top-toolbar">
+</head>
+<body>
+<div class="header no-select">
+    <div class="top-left">
+        <div class="brand">
+            <img
+                    src="/favicon/apple-touch-icon.png"
+                    alt="Blank Editor"
+                    class="logo"
+            />
+
+            <input
+                    id="title"
+                    type="text"
+                    class="editor-title dotted"
+                    placeholder="Untitled"
+            />
+        </div>
+    </div>
+
+    <div class="top-toolbar" id="top-toolbar">
         <button data-cmd="bold" title="Bold (Ctrl/Cmd + B)"><b>B</b></button>
         <button data-cmd="italic" title="Italic (Ctrl/Cmd + I)">
-          <i>I</i>
+            <i>I</i>
         </button>
         <button data-cmd="underline" title="Underline (Ctrl/Cmd + U)">
-          <u>U</u>
+            <u>U</u>
         </button>
         <button data-cmd="highlight" title="Highlight (Ctrl/Cmd + H)">H</button>
 
@@ -127,10 +134,10 @@
         <div class="divider"></div>
 
         <div class="align-group">
-          <button data-cmd="align-left" title="Align Left">⟸</button>
-          <button data-cmd="align-right" title="Align Right">⟹</button>
-          <button data-cmd="align-center" title="Align Center">≡</button>
-          <button data-cmd="align-justify" title="Justify">☰</button>
+            <button data-cmd="align-left" title="Align Left">⟸</button>
+            <button data-cmd="align-right" title="Align Right">⟹</button>
+            <button data-cmd="align-center" title="Align Center">≡</button>
+            <button data-cmd="align-justify" title="Justify">☰</button>
         </div>
 
         <div class="divider"></div>
@@ -140,86 +147,86 @@
 
         <div class="divider"></div>
         <button data-cmd="journal" title="journal">Jr.</button>
-      </div>
     </div>
-    <div class="top-right">
-      <button class="dots-btn" aria-label="More options">
+</div>
+<div class="top-right">
+    <button class="dots-btn" aria-label="More options">
         <span></span>
         <span></span>
         <span></span>
-      </button>
-    </div>
-    <div class="dropdown-menu no-select">
-      <a href="#" id="new">New <span class="shortcut">⌘⇧O</span></a>
-      <a href="#" id="copy">Copy</a>
-      <a href="#" id="save">Save <span class="shortcut">⌘S</span></a>
-      <a href="#" id="clear" class="danger">Clear</a>
-      <div class="dropdown-divider"></div>
-      <a
-        href="https://github.com/puni9869/blank-editor"
-        target="_blank"
-        id="github"
-      >
+    </button>
+</div>
+<div class="dropdown-menu no-select">
+    <a href="#" id="new">New <span class="shortcut">⌘⇧O</span></a>
+    <a href="#" id="copy">Copy</a>
+    <a href="#" id="save">Save <span class="shortcut">⌘S</span></a>
+    <a href="#" id="clear" class="danger">Clear</a>
+    <div class="dropdown-divider"></div>
+    <a
+            href="https://github.com/puni9869/blank-editor"
+            target="_blank"
+            id="github"
+    >
         Github
         <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="16"
-          height="16"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          stroke-width="2"
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2"
         >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M14 3h7m0 0v7m0-7L10 14"
-          />
-          <path stroke-linecap="round" stroke-linejoin="round" d="M5 5v14h14" />
+            <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M14 3h7m0 0v7m0-7L10 14"
+            />
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 5v14h14"/>
         </svg>
-      </a>
-    </div>
-    <div class="editor-wrapper">
-      <div class="placeholder"></div>
-      <div id="editor"></div>
-    </div>
+    </a>
+</div>
+<div class="editor-wrapper">
+    <div class="placeholder"></div>
+    <div id="editor"></div>
+</div>
 
-    <!-- Save Modal -->
-    <div
-      class="modal-backdrop"
-      id="saveModal"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="saveTitle"
-    >
-      <div class="modal">
+<!-- Save Modal -->
+<div
+        class="modal-backdrop"
+        id="saveModal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="saveTitle"
+>
+    <div class="modal">
         <h2 id="saveTitle">Save file</h2>
 
         <label for="fileName">
-          File name
-          <input
-            type="text"
-            id="fileName"
-            placeholder="Untitled"
-            autocomplete="off"
-          />
+            File name
+            <input
+                    type="text"
+                    id="fileName"
+                    placeholder="Untitled"
+                    autocomplete="off"
+            />
         </label>
 
         <label for="fileFormat">
-          Format
-          <select id="fileFormat">
-            <option value=".txt">Text (.txt)</option>
-          </select>
+            Format
+            <select id="fileFormat">
+                <option value=".txt">Text (.txt)</option>
+            </select>
         </label>
 
         <div class="modal-actions">
-          <button id="close-modal-btn" type="button" class="btn ghost">
-            Cancel
-          </button>
-          <button id="save-file" type="button" class="btn primary">Save</button>
+            <button id="close-modal-btn" type="button" class="btn ghost">
+                Cancel
+            </button>
+            <button id="save-file" type="button" class="btn primary">Save</button>
         </div>
-      </div>
     </div>
-    <script type="module" rel="preload" src="src/main.js"></script>
-  </body>
+</div>
+<script type="module" rel="preload" src="src/main.js"></script>
+</body>
 </html>
