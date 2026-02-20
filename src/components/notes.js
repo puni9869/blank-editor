@@ -57,7 +57,7 @@ export class NotesModal {
     if (this._mounted) return;
     parent.appendChild(this.root);
 
-    this.closeBtn.addEventListener('click', this.unmount);
+    this.closeBtn.addEventListener('click', this._onClose);
     this.root.addEventListener('click', this._onBackdrop);
     this.searchInput.addEventListener('input', this._onSearch);
     this.listEl.addEventListener('click', this._onListClick);
