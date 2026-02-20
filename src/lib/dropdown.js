@@ -3,7 +3,42 @@ import { info, success } from './toast';
 import { Note } from '../models/note';
 import { NotesModal } from '../components/notes';
 import { Notes } from '../db/notes';
-import { getNoteId, saveNoteId } from './editor-notes-id.js';
+import { clearNoteId, getNoteId, saveNoteId } from './editor-notes-id.js';
+
+function hasEditorContent(editor, title = '') {
+  if (!editor) return false;
+  const text = editor.getText(false)?.trim();
+  return Boolean(text) || Boolean(title.trim());
+}
+
+async function persistCurrentNote(editor, title = '') {
+  if (!editor) return null;
+
+  const fallbackTitle = editor.getText(false)?.trim()?.slice(0, 15) || '';
+  const resolvedTitle = title.trim() || fallbackTitle;
+
+  if (!hasEditorContent(editor, resolvedTitle)) {
+    return null;
+  }
+
+  const note = new Note({
+    title: resolvedTitle,
+    tags: ['default'],
+    workspace: ['default'],
+    content: editor.getJSON(),
+  });
+
+  let noteId = getNoteId();
+  if (!noteId) {
+    noteId = await Notes.add(note);
+    saveNoteId(editor, noteId);
+  } else {
+    await Notes.update(noteId, note);
+  }
+
+  saveTitle(editor, resolvedTitle);
+  return noteId;
+}
 
 async function doAction(editor, t) {
   if (!editor) {
@@ -17,6 +52,7 @@ async function doAction(editor, t) {
   if (id === 'new') {
     editor?.commands?.clearContent();
     clearTitleData();
+    clearNoteId();
     editor?.commands?.focus();
     info('New page created');
   }
@@ -43,9 +79,26 @@ async function doAction(editor, t) {
     const notes = await Notes.getAll();
     const notesModal = new NotesModal({
       getNotes: () => notes,
-      onSelect: note => {
+      onSelect: async note => {
+        const currentTitle = document.querySelector('#title')?.value || '';
+        const currentNoteId = getNoteId();
+        const selectedNoteId = note?.id;
+
+        if (
+          typeof selectedNoteId !== 'undefined' &&
+          String(currentNoteId || '') !== String(selectedNoteId)
+        ) {
+          await persistCurrentNote(editor, currentTitle);
+        }
+
+        if (typeof selectedNoteId !== 'undefined') {
+          saveNoteId(editor, selectedNoteId);
+        } else {
+          clearNoteId();
+        }
+
         editor?.commands?.setContent(note.content || '');
-        document.querySelector('#title').value = note.title || '';
+        saveTitle(editor, note.title || '');
       },
     });
 
@@ -88,30 +141,15 @@ async function saveFile(editor) {
     return;
   }
 
-  const name = fileNameEl.value;
-  const format = fileFormatEl.value;
+  const name = fileNameEl.value.trim();
 
-  saveTitle(editor, name);
+  await persistCurrentNote(editor, name);
 
-  let noteId = getNoteId();
-
-  const note = new Note({
-    title: name,
-    tags: ['default'],
-    workspace: ['default'],
-    content: editor.getJSON(),
-  });
-
-  if (!noteId) {
-    noteId = await Notes.add(note);
-    saveNoteId(editor, noteId);
-  } else {
-    await Notes.update(noteId, note);
-  }
-
-  const text = editor.getText(false);
-  downloadTxt(name + format, text);
+  // const text = editor.getText(false);
+  // const format = fileFormatEl.value;
+  // downloadTxt(name + format, text);
   closeSaveModal();
+  success("File is saved");
 }
 
 function downloadTxt(filename, text) {

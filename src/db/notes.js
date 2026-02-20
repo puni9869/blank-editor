@@ -25,7 +25,8 @@ export class Notes {
   }
 
   static update(id, note) {
-    if (!parseInt(id)) {
+    const normalizedId = Number.parseInt(id, 10);
+    if (Number.isNaN(normalizedId)) {
       return Promise.reject(new Error('A valid note id is required.'));
     }
 
@@ -37,8 +38,7 @@ export class Notes {
       const store = this._store('readwrite');
       const request = store.put({
         updatedAt: note.updatedAt,
-        content: note.content,
-        id: parseInt(id),
+        content: note.content, id: normalizedId,
       });
 
       request.onsuccess = () => resolve(request.result);
