@@ -44,7 +44,7 @@ async function doAction(editor, t) {
     const notesModal = new NotesModal({
       getNotes: () => notes,
       onSelect: note => {
-        document.querySelector('#editor').value = note.content || '';
+        editor?.commands?.setContent(note.content || '');
         document.querySelector('#title').value = note.title || '';
       },
     });
