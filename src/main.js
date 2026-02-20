@@ -8,20 +8,30 @@ import { Journal } from './plugins/journal';
 import { loadMenu } from './lib/dropdown.js';
 import { loadTopToolbar } from './lib/toolbar.js';
 import { registerKey } from './lib/keyboard-shortcut.js';
-import { saveTitle } from './lib/editor-title.js';
-import { EDITOR_STORAGE_KEY } from './config/config.js';
+import { saveTitle, setTitle } from './lib/editor-title.js';
+import {
+  EDITOR_NOTES_ID_KEY,
+  EDITOR_STORAGE_KEY,
+  EDITOR_TITLE_KEY,
+} from './config/config.js';
 import { Database } from './db/database.js';
+import { setNoteId } from './lib/editor-notes-id.js';
 
 /* --------------------
    Storage helpers
 -------------------- */
-function loadContent() {
+function loadContent(editor) {
   try {
     const raw = localStorage.getItem(EDITOR_STORAGE_KEY);
-    return raw ? JSON.parse(raw) : null;
+    editor?.commands.setContent(raw ? JSON.parse(raw) : null);
+
+    const id = localStorage.getItem(EDITOR_NOTES_ID_KEY);
+    id && setNoteId(editor, id);
+
+    const title = localStorage.getItem(EDITOR_TITLE_KEY);
+    setTitle(editor, title);
   } catch (err) {
     console.warn('Failed to load editor content', err);
-    return null;
   }
 }
 
@@ -66,9 +76,6 @@ function loadEditor() {
         types: ['heading', 'paragraph'],
       }),
     ],
-
-    content: loadContent(),
-
     autofocus: 'end',
 
     injectCSS: false, // keep styling fully controlled by you
@@ -80,16 +87,10 @@ function loadEditor() {
         autocorrect: 'off',
       },
     },
-    onCreate({ editor }) {
-      saveTitle(editor);
-    },
     onUpdate({ editor }) {
       saveTitle(editor);
       saveContent(editor);
     },
-  });
-  editor.on('update', () => {
-    saveContent(editor);
   });
   return editor;
 }
@@ -100,6 +101,7 @@ window.addEventListener('load', async () => {
   loadMenu(editor);
   loadTopToolbar(editor);
   registerKey(editor);
+  loadContent(editor);
   if (import.meta.env?.DEV) {
     window.editor = editor;
   }

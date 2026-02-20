@@ -1,12 +1,20 @@
 import { EDITOR_TITLE_KEY } from '../config/config.js';
 
-export function saveTitle(editor) {
+export function saveTitle(editor, name) {
   if (!editor) {
     return;
   }
+  if (!name) {
+    name = editor.getText()?.trim()?.slice(0, 15);
+  }
 
-  const title = localStorage.getItem(EDITOR_TITLE_KEY);
+  localStorage.setItem(EDITOR_TITLE_KEY, name);
 
+  const titleEl = document.getElementById('title');
+  titleEl.value = name;
+}
+
+export function setTitle(editor, title) {
   const titleEl = document.getElementById('title');
   titleEl.value = title || editor.getText()?.trim()?.slice(0, 15);
 }

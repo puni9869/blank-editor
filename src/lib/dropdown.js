@@ -1,9 +1,9 @@
 import { clearTitleData, saveTitle } from './editor-title.js';
-import { EDITOR_TITLE_KEY } from '../config/config.js';
 import { info, success } from './toast';
 import { Note } from '../models/note';
 import { NotesModal } from '../components/notes';
 import { Notes } from '../db/notes';
+import { getNoteId, saveNoteId } from './editor-notes-id.js';
 
 async function doAction(editor, t) {
   if (!editor) {
@@ -79,7 +79,7 @@ export function openSaveModal(editor) {
   }, 0);
 }
 
-async function saveFile(editor, title) {
+async function saveFile(editor) {
   const fileNameEl = document.getElementById('file-name');
   const fileFormatEl = document.getElementById('file-format');
   const titleEL = document.getElementById('title');
@@ -91,17 +91,24 @@ async function saveFile(editor, title) {
   const name = fileNameEl.value;
   const format = fileFormatEl.value;
 
-  localStorage?.setItem(EDITOR_TITLE_KEY, name);
+  saveTitle(editor, name);
+
+  let noteId = getNoteId();
 
   const note = new Note({
-    title: title || name,
+    title: name,
     tags: ['default'],
     workspace: ['default'],
     content: editor.getJSON(),
   });
-  await Notes.add(note);
 
-  saveTitle(editor);
+  if (!noteId) {
+    noteId = await Notes.add(note);
+    saveNoteId(editor, noteId);
+  } else {
+    await Notes.update(noteId, note);
+  }
+
   const text = editor.getText(false);
   downloadTxt(name + format, text);
   closeSaveModal();

@@ -24,10 +24,22 @@ export class Notes {
     });
   }
 
-  static update(note) {
+  static update(id, note) {
+    if (!parseInt(id)) {
+      return Promise.reject(new Error('A valid note id is required.'));
+    }
+
+    if (!note || typeof note !== 'object') {
+      return Promise.reject(new Error('A note object is required.'));
+    }
+
     return new Promise((resolve, reject) => {
       const store = this._store('readwrite');
-      const request = store.put(note);
+      const request = store.put({
+        updatedAt: note.updatedAt,
+        content: note.content,
+        id: parseInt(id),
+      });
 
       request.onsuccess = () => resolve(request.result);
       request.onerror = () => reject(request.error);
