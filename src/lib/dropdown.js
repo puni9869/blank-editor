@@ -1,8 +1,9 @@
 import { clearTitleData, saveTitle } from './editor-title.js';
 import { EDITOR_TITLE_KEY } from '../config/config.js';
 import { info, success } from './toast';
-import { Notes } from '../db/notes';
 import { Note } from '../models/note';
+import { NotesModal } from '../components/notes';
+import { Notes } from '../db/notes';
 
 async function doAction(editor, t) {
   if (!editor) {
@@ -37,13 +38,27 @@ async function doAction(editor, t) {
   if (id === 'save') {
     openSaveModal(editor);
   }
+
+  if (id === 'all-notes') {
+    const notes = await Notes.getAll();
+    const notesModal = new NotesModal({
+      getNotes: () => notes,
+      onSelect: note => {
+        document.querySelector('#editor').value = note.content || '';
+        document.querySelector('#title').value = note.title || '';
+      },
+    });
+
+    notesModal.mount();
+    await notesModal.open();
+  }
 }
 
 export function openSaveModal(editor) {
-  const modal = document.getElementById('saveModal');
+  const modal = document.getElementById('save-modal');
   const saveBtn = document.getElementById('save-file');
   const cancelBtn = document.getElementById('close-modal-btn');
-  const fileNameEl = document.getElementById('fileName');
+  const fileNameEl = document.getElementById('file-name');
   const titleEL = document.getElementById('title');
   fileNameEl.value = titleEL.value;
   modal.classList.add('modal-backdrop-show');
@@ -55,7 +70,7 @@ export function openSaveModal(editor) {
   fileNameEl.onkeydown = e => {
     if (e.key === 'Enter') {
       e.preventDefault();
-      saveFile(editor);
+      return saveFile(editor);
     }
   };
 
@@ -64,9 +79,9 @@ export function openSaveModal(editor) {
   }, 0);
 }
 
-async function saveFile(editor) {
-  const fileNameEl = document.getElementById('fileName');
-  const fileFormatEl = document.getElementById('fileFormat');
+async function saveFile(editor, title) {
+  const fileNameEl = document.getElementById('file-name');
+  const fileFormatEl = document.getElementById('file-format');
   const titleEL = document.getElementById('title');
 
   if (!editor || !fileNameEl || !fileFormatEl || !titleEL) {
@@ -79,6 +94,7 @@ async function saveFile(editor) {
   localStorage?.setItem(EDITOR_TITLE_KEY, name);
 
   const note = new Note({
+    title: title || name,
     tags: ['default'],
     workspace: ['default'],
     content: editor.getJSON(),
@@ -107,16 +123,16 @@ function downloadTxt(filename, text) {
 }
 
 export function closeSaveModal() {
-  const modal = document.getElementById('saveModal');
+  const modal = document.getElementById('save-modal');
   if (modal) modal.classList.remove('modal-backdrop-show');
 
-  const fileName = document.getElementById('fileName');
+  const fileName = document.getElementById('file-name');
   if (fileName) fileName.value = '';
 }
 
 export function loadMenu(editor) {
   window.addEventListener('load', () => {
-    document.getElementById('moreMenu').hidden = false;
+    document.getElementById('more-menu').hidden = false;
   });
 
   const btn = document.querySelector('.dots-btn');
@@ -127,7 +143,7 @@ export function loadMenu(editor) {
     menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
   });
 
-  ['copy', 'clear', 'new', 'save'].forEach(action => {
+  ['copy', 'clear', 'new', 'save', 'all-notes'].forEach(action => {
     const elm = document.querySelector(`#${action}`);
     elm.addEventListener('click', async e => await doAction(editor, e));
   });

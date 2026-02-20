@@ -1,26 +1,19 @@
-import { Database } from '../db/database';
+import { Database } from './database';
 
 export class Notes {
-  /**
-   * Get object store in given mode
-   * @private
-   */
+  static NAME = 'notes';
+
   static _store(mode = 'readonly') {
     const db = Database.getDb();
 
     if (!db) {
-      throw new Error('Database not initialized. Call Database.open() first.');
+      throw new Error('Database not initialized. Call Database.init() first.');
     }
 
-    const tx = db.transaction('notes', mode);
-    return tx.objectStore('notes');
+    const tx = db.transaction(this.NAME, mode);
+    return tx.objectStore(this.NAME);
   }
 
-  /**
-   * Create a new note
-   * @param {Object} note
-   * @returns {Promise<number>} inserted id
-   */
   static add(note) {
     return new Promise((resolve, reject) => {
       const store = this._store('readwrite');
@@ -31,10 +24,6 @@ export class Notes {
     });
   }
 
-  /**
-   * Update an existing note
-   * @param {Object} note
-   */
   static update(note) {
     return new Promise((resolve, reject) => {
       const store = this._store('readwrite');
@@ -45,10 +34,6 @@ export class Notes {
     });
   }
 
-  /**
-   * Get note by id
-   * @param {number} id
-   */
   static get(id) {
     return new Promise((resolve, reject) => {
       const store = this._store('readonly');
@@ -59,9 +44,6 @@ export class Notes {
     });
   }
 
-  /**
-   * Get all notes
-   */
   static getAll() {
     return new Promise((resolve, reject) => {
       const store = this._store('readonly');
@@ -72,10 +54,6 @@ export class Notes {
     });
   }
 
-  /**
-   * Delete note by id
-   * @param {number} id
-   */
   static delete(id) {
     return new Promise((resolve, reject) => {
       const store = this._store('readwrite');

@@ -11,11 +11,13 @@ export class Note {
    * Create a new Note
    *
    * @param {Object} [options]
+   * @param {string|null} [options.title=null] - Notes title (Text)
    * @param {string|null} [options.content=null] - Note content (HTML/JSON/Text)
    * @param {string[]} [options.tags=['default']] - Tags assigned to note
    * @param {string[]} [options.workspace=['default']] - Workspace identifiers
    */
   constructor({
+    title = '',
     content = null,
     tags = ['default'],
     workspace = ['default'],
@@ -40,6 +42,9 @@ export class Note {
 
     /** @type {string[]} Workspace identifiers */
     this.workspace = workspace;
+
+    /** @type {string} Notes title */
+    this.title = title;
   }
 
   /**
@@ -77,6 +82,7 @@ export class Note {
    */
   toJSON() {
     return {
+      title: this.title,
       appVersion: this.appVersion,
       content: this.content,
       createdAt: this.createdAt,

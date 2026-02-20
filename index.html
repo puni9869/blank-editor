@@ -154,11 +154,13 @@
         <span></span>
       </button>
     </div>
-    <div class="dropdown-menu no-select">
+    <div class="dropdown-menu no-select" id="more-menu">
       <a href="#" id="new">New <span class="shortcut">⌘⇧O</span></a>
       <a href="#" id="copy">Copy</a>
       <a href="#" id="save">Save <span class="shortcut">⌘S</span></a>
       <a href="#" id="clear" class="danger">Clear</a>
+      <div class="dropdown-divider"></div>
+      <a href="#" id="all-notes">All Notes</a>
       <div class="dropdown-divider"></div>
       <a
         href="https://github.com/puni9869/blank-editor"
@@ -192,27 +194,27 @@
     <!-- Save Modal -->
     <div
       class="modal-backdrop"
-      id="saveModal"
+      id="save-modal"
       role="dialog"
       aria-modal="true"
-      aria-labelledby="saveTitle"
+      aria-labelledby="save-title"
     >
       <div class="modal">
-        <h2 id="saveTitle">Save file</h2>
+        <h2 id="save-title">Save file</h2>
 
-        <label for="fileName">
+        <label for="file-name">
           File name
           <input
             type="text"
-            id="fileName"
+            id="file-name"
             placeholder="Untitled"
             autocomplete="off"
           />
         </label>
 
-        <label for="fileFormat">
+        <label for="file-format">
           Format
-          <select id="fileFormat">
+          <select id="file-format">
             <option value=".txt">Text (.txt)</option>
           </select>
         </label>

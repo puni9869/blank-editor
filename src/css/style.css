@@ -262,7 +262,7 @@ p.is-editor-empty:first-child::before {
   right: 15px;
   top: 40px;
 
-  min-width: 100px;
+  min-width: 160px;
   overflow: hidden;
 
   background: var(--white);
@@ -692,6 +692,59 @@ button[data-cmd='highlight'] {
 
   opacity: 0.4;
 }
+
+/* Notes modal specific */
+.notes-modal {
+  width: min(92vw, 640px);
+}
+
+.notes-list {
+  border: 1px solid var(--gray-2);
+  max-height: 320px;
+  overflow: auto;
+  background: #fff;
+}
+
+.note-row {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px;
+  text-align: left;
+  padding: 10px 12px;
+  border: 0;
+  border-bottom: 1px solid var(--gray-15);
+  background: #fff;
+  cursor: pointer;
+}
+
+.note-row:hover {
+  background: #f8fafc;
+}
+
+.note-title {
+  font-size: 0.9rem;
+  color: #0f172a;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.note-date {
+  font-size: 0.75rem;
+  color: #64748b;
+}
+
+.notes-empty {
+  padding: 12px;
+  font-size: 0.85rem;
+  color: #64748b;
+  text-align: center;
+}
+
+/*
+--------------
+*/
 
 /* Mobile */
 @media (max-width: 1040px) {

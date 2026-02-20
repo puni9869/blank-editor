@@ -1,6 +1,13 @@
 import { error } from '../lib/toast.js';
 import { EDITOR_DB_NAME, EDITOR_DB_VERSION } from '../config/config.js';
 
+const schemas = {
+  notes: {
+    keyPath: 'id',
+    autoIncrement: true,
+  },
+};
+
 export class Database {
   /** @type {IDBDatabase|null} */
   static db = null;
@@ -16,13 +23,13 @@ export class Database {
   static init() {
     const indexedDB =
       window.indexedDB ||
-      window?.mozIndexedDB ||
-      window?.webkitIndexedDB ||
-      window?.msIndexedDB;
+      window.mozIndexedDB ||
+      window.webkitIndexedDB ||
+      window.msIndexedDB;
 
     if (!indexedDB) {
       error('Failed to initialize storage');
-      return Promise.reject('IndexedDB not supported');
+      return Promise.reject(new Error('IndexedDB not supported'));
     }
 
     return new Promise((resolve, reject) => {
@@ -30,25 +37,31 @@ export class Database {
 
       request.onupgradeneeded = event => {
         const db = event.target.result;
-
-        if (!db.objectStoreNames.contains('notes')) {
-          db.createObjectStore('notes', {
-            keyPath: 'id',
-            autoIncrement: true,
-          });
-        }
+        Object.keys(schemas).forEach(schema => {
+          if (!db.objectStoreNames.contains(schema)) {
+            db.createObjectStore(schema, schemas[schema]);
+          }
+        });
       };
 
       request.onsuccess = event => {
-        Database.db = event.target.result;
-        resolve(Database.db);
+        this.db = event.target.result;
+
+        this.db.onversionchange = () => {
+          this.db?.close();
+          this.db = null;
+        };
+
+        resolve(this.db);
       };
 
-      request.onerror = () => reject(request.error);
+      request.onblocked = () => reject(new Error('Database upgrade blocked'));
+      request.onerror = () =>
+        reject(request.error || new Error('Failed to open database'));
     });
   }
 
   static getDb() {
-    return Database.db;
+    return this.db;
   }
 }

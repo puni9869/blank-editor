@@ -42,9 +42,6 @@ function handleKey(event, editor) {
     event.preventDefault();
     closeSaveModal();
     editor.commands.focus();
-  } else if (isCtrlOrCmdWithShift && (event.key === 'r' || event.key === 'R')) {
-    event.stopPropagation();
-    event.preventDefault();
   }
 }
 
