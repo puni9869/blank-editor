@@ -38,7 +38,8 @@ export class Notes {
       const store = this._store('readwrite');
       const request = store.put({
         updatedAt: note.updatedAt,
-        content: note.content, id: normalizedId,
+        content: note.content,
+        id: normalizedId,
       });
 
       request.onsuccess = () => resolve(request.result);

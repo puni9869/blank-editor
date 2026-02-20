@@ -149,7 +149,7 @@ async function saveFile(editor) {
   // const format = fileFormatEl.value;
   // downloadTxt(name + format, text);
   closeSaveModal();
-  success("File is saved");
+  success('File is saved');
 }
 
 function downloadTxt(filename, text) {
