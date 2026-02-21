@@ -18,7 +18,7 @@ export function saveTitle(editor, name) {
 export function setTitle(editor, title) {
   const titleEl = document.getElementById('title');
   titleEl.value = title || editor.getText()?.trim()?.slice(0, 15);
-  document.title = 'punit';
+  document.title = '';
 }
 
 export function clearTitleData() {
