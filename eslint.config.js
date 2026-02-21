@@ -4,7 +4,15 @@ import prettier from 'eslint-config-prettier';
 
 export default [
   {
-    ignores: ['node_modules/**', 'dist/**', 'build/**', 'coverage/**'],
+    ignores: [
+      'node_modules/**',
+      'dist/**',
+      'build/**',
+      'coverage/**',
+      'docs/**',
+    ],
+  },
+  {
     files: ['**/*.{js,mjs,cjs}'],
     languageOptions: {
       ecmaVersion: 'latest',

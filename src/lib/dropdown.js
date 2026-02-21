@@ -91,7 +91,7 @@ export async function toggleFullScreen() {
       info('Fullscreen is not supported in this browser');
       return;
     }
-  } catch (error) {
+  } catch {
     info('Unable to toggle full screen mode');
   }
 }
@@ -184,27 +184,10 @@ async function saveFile(editor) {
 
   await persistCurrentNote(editor, name);
 
-  // const text = editor.getText(false);
-  // const format = fileFormatEl.value;
-  // downloadTxt(name + format, text);
   closeSaveModal();
   success('File is saved');
 }
 
-function downloadTxt(filename, text) {
-  const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
-  const url = URL.createObjectURL(blob);
-
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = filename;
-
-  document.body.appendChild(a);
-  a.click();
-
-  document.body.removeChild(a);
-  URL.revokeObjectURL(url);
-}
 
 export function closeSaveModal() {
   const modal = document.getElementById('save-modal');
