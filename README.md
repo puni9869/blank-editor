@@ -50,7 +50,7 @@ Check out the live demo here: [Blank Editor Demo](https://puni9869.github.io/bla
 
 ### Screenshots
 
-![Blank Editor Screenshot 8](screenshots/img_7.png)
+![Blank Editor Screenshot 8](screenshots/image%20copy%204.png)
 ![Blank Editor Screenshot 4](screenshots/image%20copy%203.png)
 ![Blank Editor Screenshot 1](screenshots/image.png)
 ![Blank Editor Screenshot 2](screenshots/image%20copy.png)
