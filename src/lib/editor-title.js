@@ -1,5 +1,12 @@
 import { EDITOR_TITLE_KEY } from '../config/config.js';
 
+const DEFAULT_TITLE = 'Blank Editor | Minimal Rich Text Editor for Focused Writing';
+
+function getDocumentTitle(rawTitle) {
+  const cleaned = String(rawTitle || '').trim();
+  return cleaned ? `${cleaned} | Blank Editor` : DEFAULT_TITLE;
+}
+
 export function saveTitle(editor, name) {
   if (!editor) {
     return;
@@ -8,21 +15,27 @@ export function saveTitle(editor, name) {
     name = editor.getText()?.trim()?.slice(0, 15);
   }
 
-  localStorage.setItem(EDITOR_TITLE_KEY, name);
+  const resolvedTitle = String(name || '').trim();
+  localStorage.setItem(EDITOR_TITLE_KEY, resolvedTitle);
 
   const titleEl = document.getElementById('title');
-  titleEl.value = name;
-  document.title = name;
+  titleEl.value = resolvedTitle;
+  document.title = getDocumentTitle(resolvedTitle);
 }
 
 export function setTitle(editor, title) {
+  const fallback = editor?.getText()?.trim()?.slice(0, 15) || '';
+  const resolvedTitle = String(title || fallback).trim();
   const titleEl = document.getElementById('title');
-  titleEl.value = title || editor.getText()?.trim()?.slice(0, 15);
-  document.title = '';
+  titleEl.value = resolvedTitle;
+  document.title = getDocumentTitle(resolvedTitle);
 }
 
 export function clearTitleData() {
   localStorage.removeItem(EDITOR_TITLE_KEY);
-  document.getElementById('title').value = '';
-  ducument.title = '';
+  const titleEl = document.getElementById('title');
+  if (titleEl) {
+    titleEl.value = '';
+  }
+  document.title = DEFAULT_TITLE;
 }
