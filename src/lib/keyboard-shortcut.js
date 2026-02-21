@@ -7,6 +7,12 @@ import { info } from '@/components/toast';
 import { keyboardKeys } from '@/plugins/keyboard-keys';
 import { showNotesModal } from '@/components/notes';
 
+/**
+ * Registers global keyboard shortcuts for editor actions.
+ *
+ * @param {object} editor
+ * @returns {() => void} Cleanup function that removes key listeners.
+ */
 export function registerShortcuts(editor) {
   return keyboardKeys(document, {
     '$mod+s': event => {

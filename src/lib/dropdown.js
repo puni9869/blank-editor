@@ -72,6 +72,11 @@ function updateFullscreenMenuLabel() {
     : 'Full Screen';
 }
 
+/**
+ * Toggles browser fullscreen mode and handles vendor-prefixed fallbacks.
+ *
+ * @returns {Promise<void>}
+ */
 export async function toggleFullScreen() {
   const doc = document;
   const root = doc.documentElement;
@@ -146,6 +151,12 @@ async function doAction(editor, t) {
   }
 }
 
+/**
+ * Opens the save modal and binds save/cancel handlers.
+ *
+ * @param {object} editor
+ * @returns {void}
+ */
 export function openSaveModal(editor) {
   const modal = document.getElementById('save-modal');
   const saveBtn = document.getElementById('save-file');
@@ -171,6 +182,12 @@ export function openSaveModal(editor) {
   }, 0);
 }
 
+/**
+ * Saves the active editor content into the note store.
+ *
+ * @param {object} editor
+ * @returns {Promise<void>}
+ */
 async function saveFile(editor) {
   const fileNameEl = document.getElementById('file-name');
   const fileFormatEl = document.getElementById('file-format');
@@ -188,7 +205,11 @@ async function saveFile(editor) {
   success('File is saved');
 }
 
-
+/**
+ * Closes and resets the save modal.
+ *
+ * @returns {void}
+ */
 export function closeSaveModal() {
   const modal = document.getElementById('save-modal');
   if (modal) modal.classList.remove('modal-backdrop-show');
@@ -197,6 +218,12 @@ export function closeSaveModal() {
   if (fileName) fileName.value = '';
 }
 
+/**
+ * Attaches dropdown menu listeners for file and view actions.
+ *
+ * @param {object} editor
+ * @returns {void}
+ */
 export function loadMenu(editor) {
   window.addEventListener('load', () => {
     document.getElementById('more-menu').hidden = false;

@@ -3,7 +3,13 @@ import { Note } from '@/types/note';
 import { saveNoteId, getNoteId, clearNoteId } from '@/lib/editor-notes-id';
 import { saveTitle } from '@/lib/editor-title';
 
+/**
+ * Notes picker modal that supports searching and selecting saved notes.
+ */
 class NotesModal {
+  /**
+   * @param {{ getNotes: () => Promise<Array<object>>, onSelect: (note: object) => Promise<void> }} options
+   */
   constructor({ getNotes, onSelect }) {
     this.getNotes = getNotes;
     this.onSelect = onSelect;
@@ -129,6 +135,12 @@ class NotesModal {
   }
 }
 
+/**
+ * Escapes unsafe HTML characters before rendering note titles.
+ *
+ * @param {string} str
+ * @returns {string}
+ */
 function escapeHtml(str) {
   return str.replace(
     /[&<>"']/g,
@@ -143,12 +155,26 @@ function escapeHtml(str) {
   );
 }
 
+/**
+ * Checks whether the editor has meaningful content to persist.
+ *
+ * @param {object} editor
+ * @param {string} [title]
+ * @returns {boolean}
+ */
 function hasEditorContent(editor, title = '') {
   if (!editor) return false;
   const text = editor.getText(false)?.trim();
   return Boolean(text) || Boolean(title.trim());
 }
 
+/**
+ * Persists the current note, creating or updating based on existing note id.
+ *
+ * @param {object} editor
+ * @param {string} [title]
+ * @returns {Promise<number|string|null>}
+ */
 async function persistCurrentNote(editor, title = '') {
   if (!editor) return null;
 
@@ -178,6 +204,12 @@ async function persistCurrentNote(editor, title = '') {
   return noteId;
 }
 
+/**
+ * Opens a modal listing all saved notes and loads the selected note into editor.
+ *
+ * @param {object} editor
+ * @returns {Promise<void>}
+ */
 const showNotesModal = async editor => {
   const notes = await Notes.getAll();
   const notesModal = new NotesModal({

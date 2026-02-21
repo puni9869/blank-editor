@@ -1,5 +1,12 @@
 const ALIGNMENTS = new Set(['left', 'center', 'right', 'justify']);
 
+/**
+ * Executes a toolbar command mapped to TipTap editor actions.
+ *
+ * @param {object} editor
+ * @param {string} cmd
+ * @returns {void}
+ */
 function runAction(editor, cmd) {
   const map = {
     bold: () => editor.commands.toggleBold(),
@@ -61,6 +68,12 @@ function syncToolbarSelects(editor, headingMenu, directionMenu) {
   }
 }
 
+/**
+ * Wires toolbar click/select events and keeps controls synchronized with selection state.
+ *
+ * @param {object} editor
+ * @returns {void}
+ */
 export function loadTopToolbar(editor) {
   const toolbar = document.getElementById('top-toolbar');
   if (!toolbar) return;
