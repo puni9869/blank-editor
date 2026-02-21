@@ -36,7 +36,7 @@ export class Notes {
 
     return new Promise((resolve, reject) => {
       const store = this._store('readwrite');
-      const request = store.put({...note, id:normalizedId});
+      const request = store.put({ ...note, id: normalizedId });
       request.onsuccess = () => resolve(request.result);
       request.onerror = () => reject(request.error);
     });

@@ -1,4 +1,8 @@
-import { closeSaveModal, openSaveModal, toggleFullScreen } from '@/lib/dropdown';
+import {
+  closeSaveModal,
+  openSaveModal,
+  toggleFullScreen,
+} from '@/lib/dropdown';
 import { info } from '@/components/toast';
 import { keyboardKeys } from '@/plugins/keyboard-keys';
 import { showNotesModal } from '@/components/notes';
@@ -10,7 +14,7 @@ export function registerShortcuts(editor) {
       event.preventDefault();
       openSaveModal(editor);
     },
-    '$mod+/': async(event) => {
+    '$mod+/': async event => {
       event.stopPropagation();
       event.preventDefault();
       await showNotesModal(editor);

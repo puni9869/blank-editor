@@ -1,5 +1,5 @@
-import { Notes } from "@/db/notes";
-import { Note } from "@/types/note";
+import { Notes } from '@/db/notes';
+import { Note } from '@/types/note';
 import { saveNoteId, getNoteId } from '@/lib/editor-notes-id';
 import { saveTitle } from '@/lib/editor-title';
 
@@ -178,7 +178,7 @@ async function persistCurrentNote(editor, title = '') {
   return noteId;
 }
 
-const showNotesModal = async (editor) => {
+const showNotesModal = async editor => {
   const notes = await Notes.getAll();
   const notesModal = new NotesModal({
     getNotes: () => notes,
@@ -207,10 +207,6 @@ const showNotesModal = async (editor) => {
 
   notesModal.mount();
   await notesModal.open();
-}
+};
 
-export {
-  NotesModal,
-  showNotesModal,
-  persistCurrentNote
-}
+export { NotesModal, showNotesModal, persistCurrentNote };

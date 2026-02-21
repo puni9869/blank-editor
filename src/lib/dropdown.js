@@ -1,10 +1,14 @@
-import { clearTitleData, } from './editor-title.js';
+import { clearTitleData } from './editor-title.js';
 import { info, success } from '../components/toast';
 import { AboutModal } from '../components/about';
 import { clearNoteId } from './editor-notes-id';
 import { persistCurrentNote, showNotesModal } from '@/components/notes';
 import appMeta from '../../package.json';
-import {DEFAULT_DEMO_URL, VALID_BUILD_TYPES, LOCALHOST_HOSTNAMES} from '@/config/config';
+import {
+  DEFAULT_DEMO_URL,
+  VALID_BUILD_TYPES,
+  LOCALHOST_HOSTNAMES,
+} from '@/config/config';
 
 function normalizeRepositoryUrl(repository) {
   const raw =
@@ -230,18 +234,12 @@ export function loadMenu(editor) {
     menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
   });
 
-  [
-    'copy',
-    'clear',
-    'new',
-    'save',
-    'all-notes',
-    'about',
-    'full-screen',
-  ].forEach(action => {
-    const elm = document.querySelector(`#${action}`);
-    elm?.addEventListener('click', async e => await doAction(editor, e));
-  });
+  ['copy', 'clear', 'new', 'save', 'all-notes', 'about', 'full-screen'].forEach(
+    action => {
+      const elm = document.querySelector(`#${action}`);
+      elm?.addEventListener('click', async e => await doAction(editor, e));
+    },
+  );
 
   document.addEventListener('click', () => {
     menu.style.display = 'none';
