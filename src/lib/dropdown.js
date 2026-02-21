@@ -1,9 +1,55 @@
 import { clearTitleData, saveTitle } from './editor-title.js';
-import { info, success } from './toast';
-import { Note } from '../models/note';
+import { info, success } from '../components/toast';
+import { Note } from '../types/note';
 import { NotesModal } from '../components/notes';
+import { AboutModal } from '../components/about';
 import { Notes } from '../db/notes';
 import { clearNoteId, getNoteId, saveNoteId } from './editor-notes-id';
+import appMeta from '../../package.json';
+
+const VALID_BUILD_TYPES = new Set(['local', 'prod', 'beta', 'test']);
+const LOCALHOST_HOSTNAMES = new Set(['localhost', '127.0.0.1', '::1']);
+const DEFAULT_DEMO_URL = 'https://puni9869.github.io/blank-editor/';
+
+function normalizeRepositoryUrl(repository) {
+  const raw =
+    typeof repository === 'string' ? repository : repository?.url || '';
+  if (!raw) {
+    return '';
+  }
+
+  return raw.replace(/^git\+/, '').replace(/\.git$/, '');
+}
+
+function resolveBuildType() {
+  const explicitType = (import.meta.env?.VITE_BUILD_TYPE || '')
+    .toLowerCase()
+    .trim();
+
+  if (VALID_BUILD_TYPES.has(explicitType)) {
+    return explicitType;
+  }
+
+  return isLocalhost() ? 'local' : 'prod';
+}
+
+function isLocalhost() {
+  return LOCALHOST_HOSTNAMES.has(window.location.hostname);
+}
+
+function createAboutModal() {
+  const buildVersion =
+    import.meta.env?.VITE_SUPPORT_JS_BUILD_VERSION || appMeta?.version || 'N/A';
+  const demoUrl = import.meta.env?.VITE_DEMO_URL || DEFAULT_DEMO_URL;
+
+  return new AboutModal({
+    supportJsBuildVersion: buildVersion,
+    buildType: resolveBuildType(),
+    githubUrl: normalizeRepositoryUrl(appMeta?.repository),
+    licenseType: appMeta?.license || 'N/A',
+    demoUrl: isLocalhost() ? demoUrl : '',
+  });
+}
 
 function hasEditorContent(editor, title = '') {
   if (!editor) return false;
@@ -105,6 +151,12 @@ async function doAction(editor, t) {
     notesModal.mount();
     await notesModal.open();
   }
+
+  if (id === 'about') {
+    const aboutModal = createAboutModal();
+    aboutModal.mount();
+    aboutModal.open();
+  }
 }
 
 export function openSaveModal(editor) {
@@ -188,7 +240,7 @@ export function loadMenu(editor) {
     menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
   });
 
-  ['copy', 'clear', 'new', 'save', 'all-notes'].forEach(action => {
+  ['copy', 'clear', 'new', 'save', 'all-notes', 'about'].forEach(action => {
     const elm = document.querySelector(`#${action}`);
     elm.addEventListener('click', async e => await doAction(editor, e));
   });

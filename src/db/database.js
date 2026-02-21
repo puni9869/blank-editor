@@ -1,4 +1,4 @@
-import { error } from '../lib/toast.js';
+import { error } from '../components/toast.js';
 import { EDITOR_DB_NAME, EDITOR_DB_VERSION } from '../config/config.js';
 
 const schemas = {

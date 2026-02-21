@@ -1,6 +1,6 @@
 import { closeSaveModal, openSaveModal } from './dropdown';
-import { info } from './toast';
-import { keyboardKeys } from './keyboard-keys';
+import { info } from '../components/toast';
+import { keyboardKeys } from '../plugins/keyboard-keys';
 
 export function registerShortcuts(editor) {
   return keyboardKeys(document, {

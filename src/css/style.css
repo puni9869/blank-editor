@@ -741,6 +741,51 @@ button[data-cmd='highlight'] {
   text-align: center;
 }
 
+/* About modal specific */
+.about-modal {
+  width: min(92vw, 560px);
+}
+
+.about-grid {
+  margin: 0;
+  border: 1px solid var(--gray-2);
+  background: #fff;
+}
+
+.about-row {
+  display: grid;
+  grid-template-columns: minmax(170px, 220px) 1fr;
+  gap: 12px;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--gray-15);
+}
+
+.about-row:last-child {
+  border-bottom: 0;
+}
+
+.about-grid dt {
+  font-size: 0.82rem;
+  color: #475569;
+}
+
+.about-grid dd {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #0f172a;
+  overflow-wrap: anywhere;
+}
+
+.about-link {
+  color: #0f172a;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.about-empty {
+  color: #64748b;
+}
+
 /*
 --------------
 */

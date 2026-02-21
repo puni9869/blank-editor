@@ -1,4 +1,4 @@
-import { EDITOR_NOTES_ID_KEY } from '../config/config.js';
+import { EDITOR_NOTES_ID_KEY } from '../config/config';
 
 export function saveNoteId(editor, id) {
   if (!editor) {

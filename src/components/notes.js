@@ -4,7 +4,7 @@ export class NotesModal {
     this.onSelect = onSelect;
     this.notes = [];
     this.filtered = [];
-    this._mounted = false;
+    this.mounted = false;
 
     this.root = document.createElement('div');
     this.root.className = 'modal-backdrop';
@@ -34,15 +34,15 @@ export class NotesModal {
     this.closeBtn = this.root.querySelector('#close-notes-modal-btn');
 
     // keep references so removeEventListener works
-    this._onClose = () => this.unmount();
+    this.onClose = () => this.unmount();
 
-    this._onBackdrop = e => {
+    this.onBackdrop = e => {
       if (e.target === this.root) this.close();
     };
 
-    this._onSearch = e => this.renderList(e.target.value);
+    this.onSearch = e => this.renderList(e.target.value);
 
-    this._onListClick = async e => {
+    this.onListClick = async e => {
       const row = e.target.closest('[data-note-id]');
       if (!row) return;
       const id = row.dataset.noteId;
@@ -54,15 +54,15 @@ export class NotesModal {
   }
 
   mount(parent = document.body) {
-    if (this._mounted) return;
+    if (this.mounted) return;
     parent.appendChild(this.root);
 
-    this.closeBtn.addEventListener('click', this._onClose);
-    this.root.addEventListener('click', this._onBackdrop);
-    this.searchInput.addEventListener('input', this._onSearch);
-    this.listEl.addEventListener('click', this._onListClick);
+    this.closeBtn.addEventListener('click', this.onClose);
+    this.root.addEventListener('click', this.onBackdrop);
+    this.searchInput.addEventListener('input', this.onSearch);
+    this.listEl.addEventListener('click', this.onListClick);
 
-    this._mounted = true;
+    this.mounted = true;
     document
       .getElementById('destroy-notes-modal-btn')
       ?.addEventListener('click', () => {
@@ -71,17 +71,17 @@ export class NotesModal {
   }
 
   unmount() {
-    if (!this._mounted) return;
+    if (!this.mounted) return;
 
-    this.closeBtn.removeEventListener('click', this._onClose);
-    this.root.removeEventListener('click', this._onBackdrop);
-    this.searchInput.removeEventListener('input', this._onSearch);
-    this.listEl.removeEventListener('click', this._onListClick);
+    this.closeBtn.removeEventListener('click', this.onClose);
+    this.root.removeEventListener('click', this.onBackdrop);
+    this.searchInput.removeEventListener('input', this.onSearch);
+    this.listEl.removeEventListener('click', this.onListClick);
 
     this.root.remove();
     this.notes = [];
     this.filtered = [];
-    this._mounted = false;
+    this.mounted = false;
   }
 
   async open() {
