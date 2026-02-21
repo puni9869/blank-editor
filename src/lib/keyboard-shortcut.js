@@ -1,6 +1,7 @@
-import { closeSaveModal, openSaveModal, toggleFullScreen } from './dropdown';
-import { info } from '../components/toast';
-import { keyboardKeys } from '../plugins/keyboard-keys';
+import { closeSaveModal, openSaveModal, toggleFullScreen } from '@/lib/dropdown';
+import { info } from '@/components/toast';
+import { keyboardKeys } from '@/plugins/keyboard-keys';
+import { showNotesModal } from '@/components/notes';
 
 export function registerShortcuts(editor) {
   return keyboardKeys(document, {
@@ -9,15 +10,19 @@ export function registerShortcuts(editor) {
       event.preventDefault();
       openSaveModal(editor);
     },
+    '$mod+/': async(event) => {
+      event.stopPropagation();
+      event.preventDefault();
+      await showNotesModal(editor);
+    },
     '$mod+shift+f': event => {
       event.stopPropagation();
       event.preventDefault();
-      void toggleFullScreen();
+      toggleFullScreen();
     },
     '$mod+shift+r': event => {
       event.stopPropagation();
       window.location.reload();
-      return false;
     },
     '$mod+shift+o': event => {
       event.stopPropagation();

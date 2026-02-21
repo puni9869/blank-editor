@@ -1,4 +1,9 @@
-export class NotesModal {
+import { Notes } from "@/db/notes";
+import { Note } from "@/types/note";
+import { saveNoteId, getNoteId } from '@/lib/editor-notes-id';
+import { saveTitle } from '@/lib/editor-title';
+
+class NotesModal {
   constructor({ getNotes, onSelect }) {
     this.getNotes = getNotes;
     this.onSelect = onSelect;
@@ -136,4 +141,76 @@ function escapeHtml(str) {
         "'": '&#39;',
       })[m],
   );
+}
+
+function hasEditorContent(editor, title = '') {
+  if (!editor) return false;
+  const text = editor.getText(false)?.trim();
+  return Boolean(text) || Boolean(title.trim());
+}
+
+async function persistCurrentNote(editor, title = '') {
+  if (!editor) return null;
+
+  const fallbackTitle = editor.getText(false)?.trim()?.slice(0, 15) || '';
+  const resolvedTitle = title.trim() || fallbackTitle;
+
+  if (!hasEditorContent(editor, resolvedTitle)) {
+    return null;
+  }
+
+  const note = new Note({
+    title: resolvedTitle,
+    tags: ['default'],
+    workspace: ['default'],
+    content: editor.getJSON(),
+  });
+
+  let noteId = getNoteId();
+  if (!noteId) {
+    noteId = await Notes.add(note);
+    saveNoteId(editor, noteId);
+  } else {
+    await Notes.update(noteId, note);
+  }
+
+  saveTitle(editor, resolvedTitle);
+  return noteId;
+}
+
+const showNotesModal = async (editor) => {
+  const notes = await Notes.getAll();
+  const notesModal = new NotesModal({
+    getNotes: () => notes,
+    onSelect: async note => {
+      const currentTitle = document.querySelector('#title')?.value || '';
+      const currentNoteId = getNoteId();
+      const selectedNoteId = note?.id;
+
+      if (
+        typeof selectedNoteId !== 'undefined' &&
+        String(currentNoteId || '') !== String(selectedNoteId)
+      ) {
+        await persistCurrentNote(editor, currentTitle);
+      }
+
+      if (typeof selectedNoteId !== 'undefined') {
+        saveNoteId(editor, selectedNoteId);
+      } else {
+        clearNoteId();
+      }
+
+      editor?.commands?.setContent(note.content || '');
+      saveTitle(editor, note.title || '');
+    },
+  });
+
+  notesModal.mount();
+  await notesModal.open();
+}
+
+export {
+  NotesModal,
+  showNotesModal,
+  persistCurrentNote
 }

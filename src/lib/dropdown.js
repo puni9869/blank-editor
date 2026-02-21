@@ -1,15 +1,10 @@
-import { clearTitleData, saveTitle } from './editor-title.js';
+import { clearTitleData, } from './editor-title.js';
 import { info, success } from '../components/toast';
-import { Note } from '../types/note';
-import { NotesModal } from '../components/notes';
 import { AboutModal } from '../components/about';
-import { Notes } from '../db/notes';
-import { clearNoteId, getNoteId, saveNoteId } from './editor-notes-id';
+import { clearNoteId } from './editor-notes-id';
+import { persistCurrentNote, showNotesModal } from '@/components/notes';
 import appMeta from '../../package.json';
-
-const VALID_BUILD_TYPES = new Set(['local', 'prod', 'beta', 'test']);
-const LOCALHOST_HOSTNAMES = new Set(['localhost', '127.0.0.1', '::1']);
-const DEFAULT_DEMO_URL = 'https://puni9869.github.io/blank-editor/';
+import {DEFAULT_DEMO_URL, VALID_BUILD_TYPES, LOCALHOST_HOSTNAMES} from '@/config/config';
 
 function normalizeRepositoryUrl(repository) {
   const raw =
@@ -97,41 +92,6 @@ export async function toggleFullScreen() {
   }
 }
 
-function hasEditorContent(editor, title = '') {
-  if (!editor) return false;
-  const text = editor.getText(false)?.trim();
-  return Boolean(text) || Boolean(title.trim());
-}
-
-async function persistCurrentNote(editor, title = '') {
-  if (!editor) return null;
-
-  const fallbackTitle = editor.getText(false)?.trim()?.slice(0, 15) || '';
-  const resolvedTitle = title.trim() || fallbackTitle;
-
-  if (!hasEditorContent(editor, resolvedTitle)) {
-    return null;
-  }
-
-  const note = new Note({
-    title: resolvedTitle,
-    tags: ['default'],
-    workspace: ['default'],
-    content: editor.getJSON(),
-  });
-
-  let noteId = getNoteId();
-  if (!noteId) {
-    noteId = await Notes.add(note);
-    saveNoteId(editor, noteId);
-  } else {
-    await Notes.update(noteId, note);
-  }
-
-  saveTitle(editor, resolvedTitle);
-  return noteId;
-}
-
 async function doAction(editor, t) {
   if (!editor) {
     return;
@@ -168,34 +128,7 @@ async function doAction(editor, t) {
   }
 
   if (id === 'all-notes') {
-    const notes = await Notes.getAll();
-    const notesModal = new NotesModal({
-      getNotes: () => notes,
-      onSelect: async note => {
-        const currentTitle = document.querySelector('#title')?.value || '';
-        const currentNoteId = getNoteId();
-        const selectedNoteId = note?.id;
-
-        if (
-          typeof selectedNoteId !== 'undefined' &&
-          String(currentNoteId || '') !== String(selectedNoteId)
-        ) {
-          await persistCurrentNote(editor, currentTitle);
-        }
-
-        if (typeof selectedNoteId !== 'undefined') {
-          saveNoteId(editor, selectedNoteId);
-        } else {
-          clearNoteId();
-        }
-
-        editor?.commands?.setContent(note.content || '');
-        saveTitle(editor, note.title || '');
-      },
-    });
-
-    notesModal.mount();
-    await notesModal.open();
+    await showNotesModal(editor);
   }
 
   if (id === 'about') {
