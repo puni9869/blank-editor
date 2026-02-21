@@ -1,6 +1,7 @@
 import { EDITOR_TITLE_KEY } from '../config/config.js';
 
-const DEFAULT_TITLE = 'Blank Editor | Minimal Rich Text Editor for Focused Writing';
+const DEFAULT_TITLE =
+  'Blank Editor | Minimal Rich Text Editor for Focused Writing';
 
 /**
  * Builds a browser title string from the active note title.
