@@ -1,4 +1,4 @@
-import { closeSaveModal, openSaveModal } from './dropdown';
+import { closeSaveModal, openSaveModal, toggleFullScreen } from './dropdown';
 import { info } from '../components/toast';
 import { keyboardKeys } from '../plugins/keyboard-keys';
 
@@ -8,6 +8,11 @@ export function registerShortcuts(editor) {
       event.stopPropagation();
       event.preventDefault();
       openSaveModal(editor);
+    },
+    '$mod+shift+f': event => {
+      event.stopPropagation();
+      event.preventDefault();
+      void toggleFullScreen();
     },
     '$mod+shift+r': event => {
       event.stopPropagation();

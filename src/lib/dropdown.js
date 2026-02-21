@@ -51,6 +51,52 @@ function createAboutModal() {
   });
 }
 
+function isFullscreenActive() {
+  return Boolean(
+    document.fullscreenElement || document.webkitFullscreenElement,
+  );
+}
+
+function updateFullscreenMenuLabel() {
+  const fullScreenMenuItem = document.getElementById('full-screen');
+  if (!fullScreenMenuItem) {
+    return;
+  }
+
+  const labelEl = fullScreenMenuItem.querySelector('.menu-label');
+  if (!labelEl) {
+    return;
+  }
+
+  labelEl.textContent = isFullscreenActive()
+    ? 'Exit Full Screen'
+    : 'Full Screen';
+}
+
+export async function toggleFullScreen() {
+  const doc = document;
+  const root = doc.documentElement;
+
+  try {
+    if (isFullscreenActive()) {
+      if (doc.exitFullscreen) {
+        await doc.exitFullscreen();
+      } else if (doc.webkitExitFullscreen) {
+        doc.webkitExitFullscreen();
+      }
+    } else if (root.requestFullscreen) {
+      await root.requestFullscreen();
+    } else if (root.webkitRequestFullscreen) {
+      root.webkitRequestFullscreen();
+    } else {
+      info('Fullscreen is not supported in this browser');
+      return;
+    }
+  } catch (error) {
+    info('Unable to toggle full screen mode');
+  }
+}
+
 function hasEditorContent(editor, title = '') {
   if (!editor) return false;
   const text = editor.getText(false)?.trim();
@@ -90,7 +136,7 @@ async function doAction(editor, t) {
   if (!editor) {
     return;
   }
-  const id = t?.target?.id;
+  const id = t?.target?.closest?.('[id]')?.id || t?.target?.id;
   if (!id) {
     return;
   }
@@ -156,6 +202,10 @@ async function doAction(editor, t) {
     const aboutModal = createAboutModal();
     aboutModal.mount();
     aboutModal.open();
+  }
+
+  if (id === 'full-screen') {
+    await toggleFullScreen();
   }
 }
 
@@ -235,14 +285,29 @@ export function loadMenu(editor) {
   const btn = document.querySelector('.dots-btn');
   const menu = document.querySelector('.dropdown-menu');
 
+  updateFullscreenMenuLabel();
+  document.addEventListener('fullscreenchange', updateFullscreenMenuLabel);
+  document.addEventListener(
+    'webkitfullscreenchange',
+    updateFullscreenMenuLabel,
+  );
+
   btn.addEventListener('click', e => {
     e.stopPropagation();
     menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
   });
 
-  ['copy', 'clear', 'new', 'save', 'all-notes', 'about'].forEach(action => {
+  [
+    'copy',
+    'clear',
+    'new',
+    'save',
+    'all-notes',
+    'about',
+    'full-screen',
+  ].forEach(action => {
     const elm = document.querySelector(`#${action}`);
-    elm.addEventListener('click', async e => await doAction(editor, e));
+    elm?.addEventListener('click', async e => await doAction(editor, e));
   });
 
   document.addEventListener('click', () => {
