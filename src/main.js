@@ -7,7 +7,7 @@ import TextAlign from '@tiptap/extension-text-align';
 import { Journal } from './plugins/journal';
 import { loadMenu } from './lib/dropdown.js';
 import { loadTopToolbar } from './lib/toolbar.js';
-import { registerKey } from './lib/keyboard-shortcut.js';
+import { registerShortcuts } from './lib/keyboard-shortcut.js';
 import { saveTitle, setTitle } from './lib/editor-title.js';
 import {
   EDITOR_NOTES_ID_KEY,
@@ -100,7 +100,7 @@ window.addEventListener('load', async () => {
   const editor = loadEditor();
   loadMenu(editor);
   loadTopToolbar(editor);
-  registerKey(editor);
+  registerShortcuts(editor);
   loadContent(editor);
   if (import.meta.env?.DEV) {
     window.editor = editor;

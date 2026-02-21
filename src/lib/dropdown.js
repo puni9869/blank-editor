@@ -3,7 +3,7 @@ import { info, success } from './toast';
 import { Note } from '../models/note';
 import { NotesModal } from '../components/notes';
 import { Notes } from '../db/notes';
-import { clearNoteId, getNoteId, saveNoteId } from './editor-notes-id.js';
+import { clearNoteId, getNoteId, saveNoteId } from './editor-notes-id';
 
 function hasEditorContent(editor, title = '') {
   if (!editor) return false;

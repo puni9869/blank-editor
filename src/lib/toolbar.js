@@ -1,4 +1,4 @@
-function actionMap(editor, cmd) {
+function actions(editor, cmd) {
   const map = {
     bold: () => editor.commands.toggleBold(),
     strike: () => editor.commands.toggleStrike(),
@@ -30,6 +30,6 @@ export function loadTopToolbar(editor) {
     if (!btn) return;
     const cmd = btn.dataset.cmd;
     editor.commands.focus();
-    actionMap(editor, cmd);
+    actions(editor, cmd);
   });
 }
