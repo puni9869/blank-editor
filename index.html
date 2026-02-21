@@ -117,8 +117,18 @@
 
         <div class="divider"></div>
 
-        <button data-cmd="heading-1" title="Heading 1">H1</button>
-        <button data-cmd="heading-2" title="Heading 2">H2</button>
+        <select
+          id="heading-menu"
+          class="toolbar-select"
+          aria-label="Heading menu"
+        >
+          <option value="paragraph">Paragraph</option>
+          <option value="1">Heading 1</option>
+          <option value="2">Heading 2</option>
+          <option value="3">Heading 3</option>
+          <option value="4">Heading 4</option>
+          <option value="5">Heading 5</option>
+        </select>
 
         <div class="divider"></div>
 
@@ -132,12 +142,16 @@
 
         <div class="divider"></div>
 
-        <div class="align-group">
-          <button data-cmd="align-left" title="Align Left">⟸</button>
-          <button data-cmd="align-right" title="Align Right">⟹</button>
-          <button data-cmd="align-center" title="Align Center">≡</button>
-          <button data-cmd="align-justify" title="Justify">☰</button>
-        </div>
+        <select
+          id="content-direction-menu"
+          class="toolbar-select"
+          aria-label="Content direction menu"
+        >
+          <option value="left">Left</option>
+          <option value="center">Center</option>
+          <option value="right">Right</option>
+          <option value="justify">Justify</option>
+        </select>
 
         <div class="divider"></div>
 
@@ -161,7 +175,8 @@
       <a href="#" id="save">Save <span class="shortcut">⌘S</span></a>
       <a href="#" id="clear" class="danger">Clear</a>
       <div class="dropdown-divider"></div>
-      <a href="#" id="all-notes">All Pages</a>
+      <a href="#" id="all-notes">All Notes</a>
+      <div class="dropdown-divider"></div>
       <a href="#" id="about">About</a>
       <div class="dropdown-divider"></div>
     </div>

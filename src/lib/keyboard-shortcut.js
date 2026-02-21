@@ -9,6 +9,11 @@ export function registerShortcuts(editor) {
       event.preventDefault();
       openSaveModal(editor);
     },
+    '$mod+shift+r': event => {
+      event.stopPropagation();
+      window.location.reload();
+      return false;
+    },
     '$mod+shift+o': event => {
       event.stopPropagation();
       event.preventDefault();
