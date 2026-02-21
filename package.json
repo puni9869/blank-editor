@@ -45,7 +45,7 @@
     "lint": "eslint . --max-warnings=0",
     "lint:fix": "eslint . --fix",
     "clean": "rm -rf node_modules dist .vite",
-    "deploy": "npm run build && git add docs && git commit -m 'Deploy to GitHub Pages' && git push"
+    "deploy": "pnpm run build && git add docs && git commit -m 'Deploy to GitHub Pages' && git push"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.2",

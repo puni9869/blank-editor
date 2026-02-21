@@ -12,14 +12,17 @@ export function saveTitle(editor, name) {
 
   const titleEl = document.getElementById('title');
   titleEl.value = name;
+  document.title = name;
 }
 
 export function setTitle(editor, title) {
   const titleEl = document.getElementById('title');
   titleEl.value = title || editor.getText()?.trim()?.slice(0, 15);
+  document.title = 'punit';
 }
 
 export function clearTitleData() {
   localStorage.removeItem(EDITOR_TITLE_KEY);
   document.getElementById('title').value = '';
+  ducument.title = '';
 }
