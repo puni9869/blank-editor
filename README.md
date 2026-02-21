@@ -5,7 +5,7 @@
 <h1 align="center">Blank Editor</h1>
 
 <p align="center">
-  A minimal, premium-grade AI-powered text editor for clean writing and intelligent editing.
+    A minimal, premium-grade AI-powered text editor for clean writing and intelligent editing.
 </p>
 
 <p align="center">
@@ -22,22 +22,25 @@
 
 ### 🧠 AI-Powered Writing Assistance
 
-- Smart content refinement and clarity improvement
-- Intelligent rewriting for better flow and tone
+- Smart content refinement and clarity improvement.
+- Built with TipTap + ProseMirror
+- Formatting: bold, italic, underline, strikethrough, highlight
+- Headings (H1-H5), bullet/ordered lists, blockquote, code block, divider
+- Text alignment controls: left, center, right, justify
+- Journal block support
 
-### 📝 Core Editing Features
+### 💾 Note Persistence
 
-- Copy, New, and Clear functionality
-- Highlight & typography extensions
-- Markdown support
-- LocalStorage content persistence
-- Fully open-source and customizable
+- Auto-save editor content and title in `localStorage`
+- Save and manage notes in IndexedDB
+- Search and reopen saved notes from the "All Notes"
 
-### 🎯 Focused Experience
+### ⚡ Productivity
 
-- Minimal, distraction-free UI
-- Premium-grade typography
-- Fully responsive (mobile optimized)
+- Keyboard shortcuts for save, notes, fullscreen, and quick new page
+- Fullscreen mode
+- Minimal interface with responsive layout
+- Toast feedback for editor actions
 
 ---
 
@@ -45,10 +48,13 @@
 
 Check out the live demo here: [Blank Editor Demo](https://puni9869.github.io/blank-editor/)
 
-![img_7.png](screenshots%2Fimg_7.png)
-![img_5.png](screenshots%2Fimg_5.png)
-![img_4.png](screenshots%2Fimg_4.png)
-![img_3.png](screenshots%2Fimg_3.png)
+### Screenshots
+
+![Blank Editor Screenshot 8](screenshots/img_7.png)
+![Blank Editor Screenshot 4](screenshots/image%20copy%203.png)
+![Blank Editor Screenshot 1](screenshots/image.png)
+![Blank Editor Screenshot 2](screenshots/image%20copy.png)
+![Blank Editor Screenshot 3](screenshots/image%20copy%202.png)
 
 ---
 
@@ -57,9 +63,11 @@ Check out the live demo here: [Blank Editor Demo](https://puni9869.github.io/bla
 ```bash
 git clone https://github.com/puni9869/blank-editor.git
 cd blank-editor
-npm install -g pnpm
+corepack enable
 pnpm install
 ```
+
+> If `corepack` is unavailable, install pnpm globally with `npm install -g pnpm`.
 
 ---
 
@@ -68,7 +76,7 @@ pnpm install
 ### Development
 
 ```bash
-pnpm run dev
+pnpm dev
 ```
 
 This opens the editor locally at `http://localhost:5173`.
@@ -76,16 +84,16 @@ This opens the editor locally at `http://localhost:5173`.
 ### Build for Production
 
 ```bash
-pnpm run build
-pnpm run preview
+pnpm build
+pnpm preview
 ```
 
 ### Format and Lint
 
 ```bash
-pnpm run format       # Prettier formatting
-pnpm run lint         # ESLint checks
-pnpm run lint:fix     # Auto-fix linting issues
+pnpm format       # Prettier formatting
+pnpm lint         # ESLint checks
+pnpm lint:fix     # Auto-fix linting issues
 ```
 
 ---
@@ -97,7 +105,7 @@ We ❤️ contributions! See [CONTRIBUTING.md](./CONTRIBUTING.md) for guidelines
 - Fork the repo
 - Create a new branch (`feature/your-feature`)
 - Submit pull requests for bug fixes or new features
-- Ensure `npm run lint` passes before submitting
+- Ensure `pnpm lint` passes before submitting
 
 ---
 
