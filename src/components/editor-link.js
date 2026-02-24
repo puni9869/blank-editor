@@ -70,9 +70,7 @@ export class LinkModel {
     // If nothing selected, check cursor position
     if (!href) {
       const marks = state.storedMarks || state.doc.resolve(from).marks();
-
       const linkMark = marks.find(mark => mark.type.name === 'link');
-
       href = linkMark?.attrs.href || null;
     }
 
