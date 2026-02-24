@@ -1,6 +1,6 @@
 import { Notes } from '@/db/notes';
 import { Note } from '@/types/note';
-import { saveNoteId, getNoteId, clearNoteId } from '@/lib/editor-notes-id';
+import { clearNoteId, getNoteId, saveNoteId } from '@/lib/editor-notes-id';
 import { saveTitle } from '@/lib/editor-title';
 
 /**

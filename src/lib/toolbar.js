@@ -1,3 +1,5 @@
+import { LinkModel } from '@/components/editor-link.js';
+
 const ALIGNMENTS = new Set(['left', 'center', 'right', 'justify']);
 
 /**
@@ -20,6 +22,10 @@ function runAction(editor, cmd) {
     ordered: () => editor.commands.toggleOrderedList(),
     highlight: () => editor.commands.toggleHighlight(),
     journal: () => editor.commands.setJournal(),
+    link: () => {
+      const link = new LinkModel(editor);
+      link.mount();
+    },
   };
   map[cmd]?.();
 }

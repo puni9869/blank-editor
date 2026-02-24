@@ -54,7 +54,7 @@ function loadEditor() {
     throw new Error('Editor mount element (#editor) not found');
   }
 
-  const editor = new Editor({
+  return new Editor({
     element,
 
     extensions: [
@@ -67,6 +67,7 @@ function loadEditor() {
         horizontalRule: true,
         strike: true,
         orderedList: true,
+        link: true,
       }),
       Placeholder.configure({ placeholder: 'Whats on your mind...' }),
       Highlight,
@@ -92,7 +93,6 @@ function loadEditor() {
       saveContent(editor);
     },
   });
-  return editor;
 }
 
 window.addEventListener('load', async () => {

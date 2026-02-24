@@ -834,6 +834,12 @@ button[data-cmd='highlight'] {
   color: #64748b;
 }
 
+/* Link style */
+.editor-link {
+  padding-top: 3px;
+  font-style: normal;
+}
+
 /*
 --------------
 */
