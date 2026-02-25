@@ -16,25 +16,25 @@ export class PreferencesModal {
         <h2 id="preferences-title">Preferences</h2>
         <dl class="about-grid preferences-grid">
           <div class="about-row">
-            <dt>Auto hide title</dt>
+            <dt>Auto-hide title</dt>
             <dd><input id="pref-auto-hide-title" type="checkbox" ${this.preferences.autoHideTitle ? 'checked' : ''}></dd>
           </div>
           <div class="about-row">
-            <dt>Auto Hide File Name</dt>
+            <dt>Auto-hide menu</dt>
             <dd><input id="pref-auto-hide-right-menu" type="checkbox" ${this.preferences.autoHideRightMenu ? 'checked' : ''}></dd>
           </div>
           <div class="about-row">
-            <dt>Auto Hide Formatting</dt>
+            <dt>Auto-hide formatting toolbar</dt>
             <dd><input id="pref-auto-hide-toolbar" type="checkbox" ${this.preferences.autoHideEditorFormattingTool ? 'checked' : ''}></dd>
           </div>
           <div class="about-row">
-            <dt>Spell Checker</dt>
+            <dt>Enable spell check</dt>
             <dd><input id="pref-spellcheck-enabled" type="checkbox" ${this.preferences.spellcheckEnabled ? 'checked' : ''}></dd>
           </div>
         </dl>
 
         <div class="modal-actions">
-          <button id="close-preferences-modal-btn" type="button" class="btn ghost">Close</button>
+          <button id="close-preferences-modal-btn" type="button" class="btn ghost">Cancel</button>
           <button id="save-preferences-modal-btn" type="button" class="btn primary">Save</button>
         </div>
       </div>
