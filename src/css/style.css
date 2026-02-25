@@ -223,6 +223,11 @@ p.is-editor-empty:first-child::before {
   position: fixed;
   top: 5px;
   right: 16px;
+  opacity: 1;
+  visibility: visible;
+  transition:
+    opacity 0.22s ease,
+    visibility 0.22s ease;
 }
 
 /* ===== Premium 30x30 Dots Button ===== */
@@ -373,6 +378,11 @@ p.is-editor-empty:first-child::before {
   gap: 18px;
   justify-items: center;
   justify-content: center;
+  opacity: 1;
+  visibility: visible;
+  transition:
+    opacity 0.22s ease,
+    visibility 0.22s ease;
 }
 
 .brand {
@@ -506,6 +516,11 @@ p.is-editor-empty:first-child::before {
   flex-direction: row;
   justify-content: center;
   gap: 3px;
+  opacity: 1;
+  visibility: visible;
+  transition:
+    opacity 0.22s ease,
+    visibility 0.22s ease;
 }
 
 /* ===== Buttons (same size, premium skin) ===== */
@@ -834,10 +849,31 @@ button[data-cmd='highlight'] {
   color: #64748b;
 }
 
+.preferences-modal {
+  width: min(92vw, 560px);
+}
+
+.preferences-grid dd {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.preferences-grid input[type='checkbox'] {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
 /* Link style */
 .editor-link {
   padding-top: 3px;
   font-style: normal;
+}
+.hide {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
 }
 
 /*

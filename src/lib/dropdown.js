@@ -1,6 +1,7 @@
 import { clearTitleData } from './editor-title.js';
 import { info, success } from '../components/toast';
 import { AboutModal } from '../components/about';
+import { PreferencesModal } from '../components/preferences';
 import { clearNoteId } from './editor-notes-id';
 import { persistCurrentNote, showNotesModal } from '@/components/notes';
 import appMeta from '../../package.json';
@@ -101,7 +102,7 @@ export async function toggleFullScreen() {
   }
 }
 
-async function doAction(editor, t) {
+async function doAction(editor, t, options = {}) {
   if (!editor) {
     return;
   }
@@ -144,6 +145,15 @@ async function doAction(editor, t) {
     const aboutModal = createAboutModal();
     aboutModal.mount();
     aboutModal.open();
+  }
+
+  if (id === 'preferences') {
+    const preferencesModal = new PreferencesModal({
+      preferences: options.getPreferences?.() || {},
+      onSave: nextPreferences => options.onPreferencesChange?.(nextPreferences),
+    });
+    preferencesModal.mount();
+    preferencesModal.open();
   }
 
   if (id === 'full-screen') {
@@ -224,7 +234,7 @@ export function closeSaveModal() {
  * @param {object} editor
  * @returns {void}
  */
-export function loadMenu(editor) {
+export function loadMenu(editor, options = {}) {
   window.addEventListener('load', () => {
     document.getElementById('more-menu').hidden = false;
   });
@@ -244,12 +254,22 @@ export function loadMenu(editor) {
     menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
   });
 
-  ['copy', 'clear', 'new', 'save', 'all-notes', 'about', 'full-screen'].forEach(
-    action => {
-      const elm = document.querySelector(`#${action}`);
-      elm?.addEventListener('click', async e => await doAction(editor, e));
-    },
-  );
+  [
+    'copy',
+    'clear',
+    'new',
+    'save',
+    'all-notes',
+    'preferences',
+    'about',
+    'full-screen',
+  ].forEach(action => {
+    const elm = document.querySelector(`#${action}`);
+    elm?.addEventListener(
+      'click',
+      async e => await doAction(editor, e, options),
+    );
+  });
 
   document.addEventListener('click', () => {
     menu.style.display = 'none';

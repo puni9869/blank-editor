@@ -9,13 +9,82 @@ import { loadMenu } from './lib/dropdown.js';
 import { loadTopToolbar } from './lib/toolbar.js';
 import { registerShortcuts } from './lib/keyboard-shortcut.js';
 import { saveTitle, setTitle } from './lib/editor-title.js';
+import { loadPreferences, savePreferences } from './lib/preferences.js';
 import {
+  AUTO_HIDE_DELAY_MS,
   EDITOR_NOTES_ID_KEY,
   EDITOR_STORAGE_KEY,
   EDITOR_TITLE_KEY,
 } from './config/config.js';
 import { Database } from './db/database.js';
 import { setNoteId } from './lib/editor-notes-id.js';
+
+function setHiddenByPreference(elementId, shouldHide) {
+  const element = document.getElementById(elementId);
+  if (!element) {
+    return;
+  }
+  element.classList.toggle('hide', shouldHide);
+}
+
+function applySpellcheck(editor, preferences) {
+  const spellcheck = preferences?.spellcheckEnabled ? 'true' : 'false';
+  editor?.view?.dom?.setAttribute('spellcheck', spellcheck);
+}
+
+function showOptions() {
+  setHiddenByPreference('top-left', false);
+  setHiddenByPreference('top-right', false);
+  setHiddenByPreference('top-toolbar', false);
+}
+
+function hideOptions(preferences) {
+  if (preferences?.autoHideTitle) {
+    setHiddenByPreference('top-left', true);
+  }
+  if (preferences?.autoHideRightMenu) {
+    setHiddenByPreference('top-right', true);
+  }
+  if (preferences?.autoHideEditorFormattingTool) {
+    setHiddenByPreference('top-toolbar', true);
+  }
+}
+
+function createAutoHideController() {
+  let autoHideTimer = null;
+
+  function clear() {
+    if (autoHideTimer) {
+      clearTimeout(autoHideTimer);
+      autoHideTimer = null;
+    }
+  }
+
+  function schedule(preferences) {
+    clear();
+    if (
+      !preferences?.autoHideTitle &&
+      !preferences?.autoHideRightMenu &&
+      !preferences?.autoHideEditorFormattingTool
+    ) {
+      return;
+    }
+
+    autoHideTimer = setTimeout(() => {
+      hideOptions(preferences);
+    }, AUTO_HIDE_DELAY_MS);
+  }
+
+  return { clear, schedule };
+}
+
+function isPointerInsideEditor(event, editor) {
+  const editorRoot = editor?.view?.dom;
+  if (!editorRoot) {
+    return false;
+  }
+  return editorRoot.contains(event.target);
+}
 
 /* --------------------
    Storage helpers
@@ -44,10 +113,10 @@ function saveContent(editor) {
   }
 }
 
-function loadEditor() {
-  /* --------------------
-   Editor bootstrap
+/* --------------------
+ Editor bootstrap
 -------------------- */
+function loadEditor(getPreferences, autoHideController) {
   const element = document.querySelector('#editor');
 
   if (!element) {
@@ -92,16 +161,73 @@ function loadEditor() {
       saveTitle(editor);
       saveContent(editor);
     },
+    onFocus() {
+      showOptions();
+      autoHideController.schedule(getPreferences());
+    },
+    onBlur() {
+      autoHideController.clear();
+      showOptions();
+    },
   });
 }
 
 window.addEventListener('load', async () => {
   await Database.init();
-  const editor = loadEditor();
-  loadMenu(editor);
+
+  let preferences = loadPreferences();
+  const autoHideController = createAutoHideController();
+
+  const editor = loadEditor(() => preferences, autoHideController);
+  applySpellcheck(editor, preferences);
+
+  loadMenu(editor, {
+    getPreferences: () => preferences,
+    onPreferencesChange: nextPreferences => {
+      preferences = savePreferences(nextPreferences);
+
+      applySpellcheck(editor, preferences);
+
+      autoHideController.clear();
+
+      if (editor.isFocused) {
+        showOptions();
+        autoHideController.schedule(preferences);
+      } else {
+        showOptions();
+      }
+    },
+  });
+  let lastMouseMoveAt = 0;
+  document.addEventListener(
+    'mousemove',
+    event => {
+      const now = Date.now();
+      if (now - lastMouseMoveAt < 120) {
+        return;
+      }
+      lastMouseMoveAt = now;
+
+      if (isPointerInsideEditor(event, editor)) {
+        return;
+      }
+
+      showOptions();
+      if (editor.isFocused) {
+        autoHideController.schedule(preferences);
+      } else {
+        autoHideController.clear();
+      }
+    },
+    { passive: true },
+  );
+
   loadTopToolbar(editor);
+
   registerShortcuts(editor);
+
   loadContent(editor);
+
   if (import.meta.env?.DEV) {
     window.editor = editor;
   }
