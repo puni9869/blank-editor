@@ -3,7 +3,7 @@ import {
   openSaveModal,
   toggleFullScreen,
 } from '@/lib/dropdown';
-import { info } from '@/components/toast';
+import { toast } from 'sonner';
 import { keyboardKeys } from '@/plugins/keyboard-keys';
 import { showNotesModal } from '@/components/notes';
 
@@ -41,7 +41,7 @@ export function registerShortcuts(editor) {
       if (hasContent) {
         openSaveModal(editor);
       } else {
-        info('New page created');
+        toast.info('New page created');
         editor?.commands?.clearContent();
         editor?.commands?.focus();
       }

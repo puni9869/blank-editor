@@ -1,4 +1,4 @@
-import { error } from '../components/toast.js';
+import { toast } from 'sonner';
 import { EDITOR_DB_NAME, EDITOR_DB_VERSION } from '../config/config.js';
 
 const schemas = {
@@ -28,7 +28,7 @@ export class Database {
       window.msIndexedDB;
 
     if (!indexedDB) {
-      error('Failed to initialize storage');
+      toast.error('Failed to initialize storage');
       return Promise.reject(new Error('IndexedDB not supported'));
     }
 

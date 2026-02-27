@@ -123,9 +123,7 @@ body {
 }
 
 .editor::after {
-  content: '';
-  display: block;
-  height: 40vh;
+  display: flex;
 }
 
 .editor:focus {

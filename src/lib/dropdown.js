@@ -1,5 +1,5 @@
-import { clearTitleData } from './editor-title.js';
-import { info, success } from '../components/toast';
+import { clearTitleData } from './editor-title';
+import { toast } from 'sonner';
 import { AboutModal } from '../components/about';
 import { PreferencesModal } from '../components/preferences';
 import { clearNoteId } from './editor-notes-id';
@@ -94,11 +94,10 @@ export async function toggleFullScreen() {
     } else if (root.webkitRequestFullscreen) {
       root.webkitRequestFullscreen();
     } else {
-      info('Fullscreen is not supported in this browser');
-      return;
+      toast.info('Fullscreen is not supported in this browser');
     }
   } catch {
-    info('Unable to toggle full screen mode');
+    toast.info('Unable to toggle full screen mode');
   }
 }
 
@@ -112,11 +111,11 @@ async function doAction(editor, t, options = {}) {
   }
 
   if (id === 'new') {
+    toast.info('New page created');
     editor?.commands?.clearContent();
     clearTitleData();
     clearNoteId();
     editor?.commands?.focus();
-    info('New page created');
   }
 
   if (id === 'clear') {
