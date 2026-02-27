@@ -1,5 +1,6 @@
 import { clearTitleData } from './editor-title';
-import { toast } from 'sonner';
+import { toast } from 'vanilla-sonner';
+import 'vanilla-sonner/style.css'; // Required styles
 import { AboutModal } from '../components/about';
 import { PreferencesModal } from '../components/preferences';
 import { clearNoteId } from './editor-notes-id';
@@ -94,10 +95,10 @@ export async function toggleFullScreen() {
     } else if (root.webkitRequestFullscreen) {
       root.webkitRequestFullscreen();
     } else {
-      toast.info('Fullscreen is not supported in this browser');
+      toast.error('Fullscreen is not supported in this browser');
     }
   } catch {
-    toast.info('Unable to toggle full screen mode');
+    toast.error('Unable to toggle full screen mode');
   }
 }
 
@@ -111,11 +112,11 @@ async function doAction(editor, t, options = {}) {
   }
 
   if (id === 'new') {
-    toast.info('New page created');
     editor?.commands?.clearContent();
     clearTitleData();
     clearNoteId();
     editor?.commands?.focus();
+    toast.success('New page created');
   }
 
   if (id === 'clear') {
@@ -130,7 +131,7 @@ async function doAction(editor, t, options = {}) {
       return;
     }
     await navigator.clipboard.writeText(text);
-    success('Content is copied');
+    toast.success("Content is copied");
   }
   if (id === 'save') {
     openSaveModal(editor);
@@ -211,7 +212,7 @@ async function saveFile(editor) {
   await persistCurrentNote(editor, name);
 
   closeSaveModal();
-  success('File is saved');
+  toast.success('File is saved');
 }
 
 /**

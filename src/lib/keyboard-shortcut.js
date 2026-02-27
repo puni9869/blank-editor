@@ -3,7 +3,7 @@ import {
   openSaveModal,
   toggleFullScreen,
 } from '@/lib/dropdown';
-import { toast } from 'sonner';
+import { toast } from 'vanilla-sonner';
 import { keyboardKeys } from '@/plugins/keyboard-keys';
 import { showNotesModal } from '@/components/notes';
 

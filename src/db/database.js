@@ -1,4 +1,4 @@
-import { toast } from 'sonner';
+import { toast } from 'vanilla-sonner';
 import { EDITOR_DB_NAME, EDITOR_DB_VERSION } from '../config/config.js';
 
 const schemas = {
