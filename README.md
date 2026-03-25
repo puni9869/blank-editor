@@ -50,11 +50,11 @@ Check out the live demo here: [Blank Editor Demo](https://puni9869.github.io/bla
 
 ### Screenshots
 
-![Blank Editor Screenshot 8](screenshots/image%20copy%204.png)
-![Blank Editor Screenshot 4](screenshots/image%20copy%203.png)
-![Blank Editor Screenshot 1](screenshots/image.png)
-![Blank Editor Screenshot 2](screenshots/image%20copy.png)
-![Blank Editor Screenshot 3](screenshots/image%20copy%202.png)
+![Blank Editor Screenshot 8](media/image%20copy%204.png)
+![Blank Editor Screenshot 4](media/image%20copy%203.png)
+![Blank Editor Screenshot 1](media/image.png)
+![Blank Editor Screenshot 2](media/image%20copy.png)
+![Blank Editor Screenshot 3](media/image%20copy%202.png)
 
 ---
 

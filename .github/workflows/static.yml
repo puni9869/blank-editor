@@ -2,7 +2,7 @@ name: Deploy static content to GitHub Pages
 
 on:
   push:
-    branches: ['main']
+    branches: [ 'main' ]
   workflow_dispatch:
 
 permissions:
@@ -63,4 +63,4 @@ jobs:
 
       # Print version deployed
       - name: Deployed version
-        run: echo "✅ Deployed Blank Editor version $PROJECT_VERSION to GitHub Pages"
+        run: echo "Deployed Blank Editor version $PROJECT_VERSION to GitHub Pages"
