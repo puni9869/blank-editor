@@ -24,10 +24,10 @@ jobs:
           fi
 
       - name: Vet
-        run: go vet ./...
+        run: make vet
 
       - name: Test
-        run: go test ./... -v
+        run: make test
 
       - name: Lint
         uses: golangci/golangci-lint-action@v9
