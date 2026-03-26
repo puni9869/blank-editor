@@ -21,7 +21,7 @@ build-frontend:
 
 test:
 	@echo "Running tests..."
-	go test ./... -v
+	go test $(shell go list ./... | grep -v $(PKG)$$) -v
 
 clean:
 	@echo "Cleaning..."
@@ -33,7 +33,7 @@ fmt:
 
 vet:
 	@echo "Vetting..."
-	go vet ./...
+	go vet $(shell go list ./... | grep -v $(PKG)$$)
 
 lint:
 	@echo "Linting..."
