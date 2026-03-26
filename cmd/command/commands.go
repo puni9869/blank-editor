@@ -6,4 +6,4 @@ import (
 )
 
 // BlankEditorCommands contains all registered CLI commands.
-var BlankEditorCommands = []cli.Command{}
+var BlankEditorCommands = []cli.Command{startCommand}

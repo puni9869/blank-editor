@@ -57,7 +57,7 @@ export const Pages = Extension.create({
 
           return {
             update(view, prevState) {
-              // ✅ only re-layout on document change
+              // ✅ only re-base on document change
               if (view.state.doc !== prevState.doc) {
                 requestAnimationFrame(layoutPages);
               }

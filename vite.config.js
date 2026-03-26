@@ -2,7 +2,8 @@ import { defineConfig } from 'vite';
 import { visualizer } from 'rollup-plugin-visualizer';
 import { fileURLToPath, URL } from 'node:url';
 export default defineConfig({
-  base: '/blank-editor/',
+  base: process.env.VITE_BASE_PATH || '/',
+  publicDir: 'assets',
   plugins: [visualizer({ open: false })],
   resolve: {
     alias: {
@@ -10,7 +11,7 @@ export default defineConfig({
     },
   },
   build: {
-    outDir: 'docs',
+    outDir: 'dist',
     sourcemap: false,
     esbuild: {
       drop: ['console', 'debugger'],
