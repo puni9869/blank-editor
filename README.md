@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="public/favicon/web-app-manifest-512x512.png" alt="App Icon" width="150" />
+  <img src="assets/favicon/web-app-manifest-512x512.png" alt="App Icon" width="150" />
 </p>
 
 <h1 align="center">Blank Editor</h1>
@@ -42,6 +42,13 @@
 - Minimal interface with responsive layout
 - Toast feedback for editor actions
 
+### 📦 Standalone Binary
+
+- Single self-contained Go binary with embedded frontend and assets
+- No external files or dependencies needed at runtime
+- Configurable via CLI flags or environment variables
+- Graceful shutdown, security headers, smart caching
+
 ---
 
 ## Demo
@@ -50,15 +57,23 @@ Check out the live demo here: [Blank Editor Demo](https://puni9869.github.io/bla
 
 ### Screenshots
 
-![Blank Editor Screenshot 8](screenshots/image%20copy%204.png)
-![Blank Editor Screenshot 4](screenshots/image%20copy%203.png)
-![Blank Editor Screenshot 1](screenshots/image.png)
-![Blank Editor Screenshot 2](screenshots/image%20copy.png)
-![Blank Editor Screenshot 3](screenshots/image%20copy%202.png)
+![Blank Editor Screenshot 8](media/image%20copy%204.png)
+![Blank Editor Screenshot 4](media/image%20copy%203.png)
+![Blank Editor Screenshot 1](media/image.png)
+![Blank Editor Screenshot 2](media/image%20copy.png)
+![Blank Editor Screenshot 3](media/image%20copy%202.png)
 
 ---
 
 ## Installation
+
+### Prerequisites
+
+- [Node.js](https://nodejs.org/) >= 18.18.0
+- [pnpm](https://pnpm.io/) (via corepack or `npm install -g pnpm`)
+- [Go](https://go.dev/) >= 1.26 (for the standalone server)
+
+### Setup
 
 ```bash
 git clone https://github.com/puni9869/blank-editor.git
@@ -73,20 +88,48 @@ pnpm install
 
 ## Usage
 
-### Development
+### Frontend Development
 
 ```bash
-pnpm dev
+pnpm dev              # Vite dev server at http://localhost:5173
+make watch-frontend   # Same, via Makefile
 ```
 
-This opens the editor locally at `http://localhost:5173`.
-
-### Build for Production
+### Build Frontend
 
 ```bash
-pnpm build
-pnpm preview
+pnpm build            # Outputs to dist/
+pnpm preview          # Preview the production build
 ```
+
+### Go Server (Standalone Binary)
+
+The Go server embeds the frontend build (`dist/`) and static assets (`assets/`) into a single self-contained binary.
+
+```bash
+make build            # Builds frontend + Go binary → build/blank-editor
+make production       # Same, with CGO_ENABLED=0, trimpath, and git version tag
+make run              # Build and start the server
+```
+
+Run the binary directly:
+
+```bash
+./build/blank-editor start                        # http://0.0.0.0:8080
+./build/blank-editor start --port 3000            # Custom port
+./build/blank-editor start --host 127.0.0.1       # Bind to localhost only
+```
+
+All flags are also configurable via environment variables:
+
+| Flag | Env Var | Default |
+|------|---------|---------|
+| `--host` | `BLANK_EDITOR_HOST` | `0.0.0.0` |
+| `--port` | `BLANK_EDITOR_PORT` | `8080` |
+| `--read-timeout` | `BLANK_EDITOR_READ_TIMEOUT` | `15s` |
+| `--write-timeout` | `BLANK_EDITOR_WRITE_TIMEOUT` | `15s` |
+| `--idle-timeout` | `BLANK_EDITOR_IDLE_TIMEOUT` | `60s` |
+| `--shutdown-timeout` | `BLANK_EDITOR_SHUTDOWN_TIMEOUT` | `10s` |
 
 ### Format and Lint
 
@@ -94,7 +137,52 @@ pnpm preview
 pnpm format       # Prettier formatting
 pnpm lint         # ESLint checks
 pnpm lint:fix     # Auto-fix linting issues
+make fmt          # Go formatting
+make vet          # Go vet
+make lint         # golangci-lint
 ```
+
+---
+
+## Project Structure
+
+```
+├── assets/              # Static assets (favicons, robots.txt, sitemap)
+├── cmd/                 # Go CLI entry point and commands
+│   ├── main.go
+│   └── command/
+├── frontend/            # Frontend source (vanilla JS + TipTap)
+│   ├── components/
+│   ├── config/
+│   ├── css/
+│   ├── db/
+│   ├── lib/
+│   ├── plugins/
+│   └── types/
+├── server/              # Go HTTP server (routes, middleware, lifecycle)
+│   ├── routes.go
+│   ├── middleware.go
+│   └── server.go
+├── pkg/                 # Shared Go packages (logger, render)
+├── templates/           # Go HTML templates
+├── embed.go             # Embeds dist/ and assets/ into the binary
+├── index.html           # Frontend entry point
+└── vite.config.js       # Vite build configuration
+```
+
+---
+
+## Deployment
+
+### GitHub Pages
+
+Pushes to `main` automatically build and deploy the frontend to GitHub Pages via the `static.yml` workflow.
+
+Live demo: [https://puni9869.github.io/blank-editor/](https://puni9869.github.io/blank-editor/)
+
+### Go Binary Releases
+
+Tagging a release (`v*`) triggers the `release.yml` workflow, which builds cross-platform binaries (linux/darwin/windows, amd64/arm64) and uploads them as GitHub release assets.
 
 ---
 
