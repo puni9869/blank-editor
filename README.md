@@ -67,6 +67,42 @@ Check out the live demo here: [Blank Editor Demo](https://puni9869.github.io/bla
 
 ## Installation
 
+### Download a Release Binary
+
+Each Git tag in the form `v*` publishes release binaries for:
+
+- Linux: `amd64`, `arm64`
+- macOS: `amd64`, `arm64`
+- Windows: `amd64`
+
+Download the asset that matches your platform from the GitHub Releases page:
+
+[https://github.com/puni9869/blank-editor/releases](https://github.com/puni9869/blank-editor/releases)
+
+Release assets use this naming pattern:
+
+```text
+blank-editor-vX.Y.Z-<os>-<arch>
+blank-editor-vX.Y.Z-<os>-<arch>.exe
+```
+
+Examples:
+
+```text
+blank-editor-v0.1.0-darwin-arm64
+blank-editor-v0.1.0-linux-amd64
+blank-editor-v0.1.0-windows-amd64.exe
+```
+
+After downloading, make the binary executable on macOS or Linux and run it:
+
+```bash
+chmod +x ./blank-editor-v0.1.0-darwin-arm64
+./blank-editor-v0.1.0-darwin-arm64 start
+```
+
+### Build from Source
+
 ### Prerequisites
 
 - [Node.js](https://nodejs.org/) >= 18.18.0
@@ -182,7 +218,18 @@ Live demo: [https://puni9869.github.io/blank-editor/](https://puni9869.github.io
 
 ### Go Binary Releases
 
-Tagging a release (`v*`) triggers the `release.yml` workflow, which builds cross-platform binaries (linux/darwin/windows, amd64/arm64) and uploads them as GitHub release assets.
+Tagging a release (`v*`) triggers the `release.yml` workflow, which builds cross-platform binaries and uploads them as GitHub release assets.
+
+To publish a release:
+
+```bash
+git tag v0.1.0
+git push origin v0.1.0
+```
+
+Users can then download the matching binary from:
+
+[https://github.com/puni9869/blank-editor/releases/tag/v0.1.0](https://github.com/puni9869/blank-editor/releases/tag/v0.1.0)
 
 ---
 
