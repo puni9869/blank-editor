@@ -35,7 +35,7 @@ jobs:
           node-version: '24'
 
       - name: Install frontend dependencies
-        run: npm i pnpm --global && corepack enable pnpm && pnpm install
+        run: npm i pnpm --global && corepack enable pnpm && pnpm install --frozen-lockfile
 
       - name: Build frontend
         run: pnpm run build

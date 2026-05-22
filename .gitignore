@@ -10,7 +10,7 @@ docs/
 build/
 out/
 .vite/
-
+.pnpm-store
 ## RollUp visual of node modules
 stats.html
 
